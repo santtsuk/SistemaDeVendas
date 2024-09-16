@@ -11,5 +11,3 @@ public class SistemaDeVendasApplication {
 
 	}
 }
-
-enviei
