@@ -10,12 +10,10 @@ public class DescontoFidelidadeFacade {
 
     private DescontoFidelidadeApplication descontoFidelidadeApplication;
 
-    
     public DescontoFidelidadeFacade(DescontoFidelidadeApplication descontoFidelidadeApplication) {
         this.descontoFidelidadeApplication = descontoFidelidadeApplication;
     }
     
-
     public DescontoFidelidade buscarPorId(int id) {
         return descontoFidelidadeApplication.buscarPorId(id);
     }
