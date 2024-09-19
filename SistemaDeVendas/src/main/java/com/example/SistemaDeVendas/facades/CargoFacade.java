@@ -9,12 +9,10 @@ public class CargoFacade {
 
     private CargoApplication cargoApplication;
 
-    
     public CargoFacade(CargoApplication cargoApplication) {
         this.cargoApplication = cargoApplication;
     }
     
-
     public Cargo buscarPorId(int id) {
         return cargoApplication.buscarPorId(id);
     }
