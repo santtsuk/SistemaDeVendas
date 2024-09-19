@@ -9,12 +9,9 @@ public class ClienteFacade {
 
     private ClienteApplication clienteApplication;
 
-    
     public ClienteFacade(ClienteApplication clienteApplication) {
         this.clienteApplication = clienteApplication;
     }
-
-    
 
     public Cliente buscarPorId(int id) {
         return clienteApplication.buscarPorId(id);
