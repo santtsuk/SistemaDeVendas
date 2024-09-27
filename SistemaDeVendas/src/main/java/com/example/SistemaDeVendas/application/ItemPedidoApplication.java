@@ -1,6 +1,6 @@
 package com.example.SistemaDeVendas.applications;
 
-import com.example.SistemaDeVendas.entities.ItemPedido;
+import com.example.SistemaDeVendas.entities.Pagamento;
 import com.example.SistemaDeVendas.entities.Pedido;
 import com.example.SistemaDeVendas.entities.Produto;
 import com.example.SistemaDeVendas.interfacies.IItemPedido;
@@ -16,12 +16,12 @@ public class ItemPedidoApplication {
         this.itemPedidoRepository = itemPedidoRepository;
     }
 
-    public ItemPedido buscarPorId(int id) {
+    public Pagamento buscarPorId(int id) {
         return this.itemPedidoRepository.buscarPorId(id);
     }
 
 
-    public ArrayList<ItemPedido> buscarTodos() {
+    public ArrayList<Pagamento> buscarTodos() {
         return this.itemPedidoRepository.buscarTodos();
     }
 
@@ -31,7 +31,7 @@ public class ItemPedidoApplication {
     }
 
 
-    public void atualizar(int id, ItemPedido itemPedidoAtualizado) {
+    public void atualizar(int id, Pagamento itemPedidoAtualizado) {
         this.itemPedidoRepository.atualizar(id, itemPedidoAtualizado);
     }
 

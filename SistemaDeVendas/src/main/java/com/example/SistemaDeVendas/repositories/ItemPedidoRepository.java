@@ -1,6 +1,6 @@
 package com.example.SistemaDeVendas.repositories;
 
-import com.example.SistemaDeVendas.entities.ItemPedido;
+import com.example.SistemaDeVendas.entities.Pagamento;
 import com.example.SistemaDeVendas.entities.Pedido;
 import com.example.SistemaDeVendas.entities.Produto;
 import com.example.SistemaDeVendas.interfacies.IItemPedido;
@@ -9,17 +9,17 @@ import java.util.ArrayList;
 
 public class ItemPedidoRepository implements IItemPedido {
 
-    ArrayList<ItemPedido> itemPedidos = new ArrayList<>();
+    ArrayList<Pagamento> itemPedidos = new ArrayList<>();
 
     @Override
-    public ItemPedido buscarPorId(int id) {
-        ItemPedido buscarItempedido = itemPedidos.stream().filter(p -> p.getId() == id).findFirst().get();
+    public Pagamento buscarPorId(int id) {
+        Pagamento buscarItempedido = itemPedidos.stream().filter(p -> p.getId() == id).findFirst().get();
 
         return buscarItempedido;
     }
 
     @Override
-    public ArrayList<ItemPedido> buscarTodos() {
+    public ArrayList<Pagamento> buscarTodos() {
 
         return itemPedidos;
     }
@@ -27,14 +27,14 @@ public class ItemPedidoRepository implements IItemPedido {
     @Override
     public void salvar(int id, Pedido idPedido, Produto idProduto, int quantidade, float precoUnitario) {
 
-        ItemPedido itemPedidoNovo = new ItemPedido(id, idPedido, idProduto, quantidade, precoUnitario);
+        Pagamento itemPedidoNovo = new Pagamento(id, idPedido, idProduto, quantidade, precoUnitario);
         itemPedidos.add(itemPedidoNovo);
     }
 
     @Override
-    public void atualizar(int id, ItemPedido itemPedido) {
+    public void atualizar(int id, Pagamento itemPedido) {
 
-        ItemPedido itemPedidoUpdate = buscarPorId(id);
+        Pagamento itemPedidoUpdate = buscarPorId(id);
 
         itemPedidoUpdate.setIdPedido(itemPedido.getIdPedido());
         itemPedidoUpdate.setIdProduto(itemPedido.getIdProduto());
