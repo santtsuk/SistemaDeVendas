@@ -1,13 +1,27 @@
 package com.example.SistemaDeVendas.entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "cliente")
 public class Cliente {
 
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "cpf")
     private String cpf;
+    @Column(name = "telefone")
     private String telefone;
+    @Column(name = "email")
     private String email;
+    @Column(name = "endereco")
     private String endereco;
+
+    public Cliente() {
+    }
 
     public Cliente(int id, String nome, String cpf, String telefone, String email, String endereco) {
         this.id = id;
