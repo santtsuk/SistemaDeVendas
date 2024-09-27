@@ -1,4 +1,4 @@
-package com.example.SistemaDeVendas.facade;
+package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.ClienteApplication;
 import com.example.SistemaDeVendas.entities.Cliente;
