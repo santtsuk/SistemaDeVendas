@@ -13,7 +13,7 @@ public class FuncionarioController {
     private FuncionarioFacade funcionarioFacade;
 
     public void inicializarProdutos() {
-        funcionarioFacade.salvar(1,"auxiliar Administrativo",1412);
+        funcionarioFacade.salvar(1,"Deivid Victor","071.881.045-73","Auxiliar de Escritrório", "Administrativo", "27/09/2024");
     }
 
     @Autowired

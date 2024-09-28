@@ -13,7 +13,7 @@ public class ItemPedidoController {
     private ItemPedidoFacade itemPedidoFacade;
 
     public void inicializarProdutos() {
-        itemPedidoFacade.salvar(1,"auxiliar Administrativo",1412);
+        itemPedidoFacade.salvar(1,"" ,"",1,1.0 );
     }
 
     @Autowired
