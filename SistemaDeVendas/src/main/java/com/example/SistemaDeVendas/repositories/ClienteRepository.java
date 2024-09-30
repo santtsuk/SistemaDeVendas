@@ -4,6 +4,7 @@ import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.interfacies.ICliente;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteRepository implements ICliente {
 
@@ -18,16 +19,14 @@ public class ClienteRepository implements ICliente {
     }
 
     @Override
-    public ArrayList<Cliente> buscarTodos() {
+    public List<Cliente> buscarTodos() {
 
         return clientes;
     }
 
     @Override
-    public void salvar(int id, String nome, String cpf, String telefone, String email, String endereco) {
-
-        Cliente clienteNovo = new Cliente(id, nome, cpf, telefone, email, endereco);
-        clientes.add(clienteNovo);
+    public void salvar(Cliente cliente) {
+        clientes.add(cliente);
     }
 
     @Override
@@ -47,4 +46,5 @@ public class ClienteRepository implements ICliente {
 
         clientes.removeIf(delete -> delete.getId() == id);
     }
+
 }

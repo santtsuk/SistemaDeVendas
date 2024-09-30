@@ -9,11 +9,11 @@ public class DescontoFidelidade {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "idCliente")
+    @Column(name = "id_Cliente")
     private Cliente idCliente;
-    @Column(name = "valorDesconto")
+    @Column(name = "valor_Desconto")
     private float valorDesconto;
-    @Column(name = "dataAplicacao")
+    @Column(name = "data_Aplicacao")
     private String dataAplicacao;
 
     public DescontoFidelidade() {

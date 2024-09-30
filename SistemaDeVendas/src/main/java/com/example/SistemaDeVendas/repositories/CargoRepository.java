@@ -4,6 +4,7 @@ import com.example.SistemaDeVendas.entities.Cargo;
 import com.example.SistemaDeVendas.interfacies.ICargo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CargoRepository implements ICargo {
 
@@ -18,16 +19,15 @@ public class CargoRepository implements ICargo {
     }
 
     @Override
-    public ArrayList<Cargo> buscarTodos() {
+    public List<Cargo> buscarTodos() {
 
         return cargos;
     }
 
     @Override
-    public void salvar(int id, String nomeCargo, float salario) {
+    public void salvar(Cargo cargo) {
 
-        Cargo cargoNovo = new Cargo(id, nomeCargo, salario);
-        cargos.add(cargoNovo);
+        cargos.add(cargo);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.interfacies.ICliente;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteApplication {
 
@@ -20,13 +21,13 @@ public class ClienteApplication {
     }
 
     
-    public ArrayList<Cliente> buscarTodos() {
+    public List<Cliente> buscarTodos() {
         return this.clienteRepository.buscarTodos();
     }
 
     
-    public void salvar(int id, String nome, String cpf, String telefone, String email, String endereco) {
-        this.clienteRepository.salvar(id, nome, cpf, telefone, email, endereco);
+    public void salvar(Cliente cliente) {
+        this.clienteRepository.salvar(cliente);
     }
 
     

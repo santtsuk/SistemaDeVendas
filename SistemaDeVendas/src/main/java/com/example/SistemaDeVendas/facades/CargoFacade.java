@@ -3,7 +3,7 @@ package com.example.SistemaDeVendas.facades;
 import com.example.SistemaDeVendas.applications.CargoApplication;
 import com.example.SistemaDeVendas.entities.Cargo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CargoFacade {
 
@@ -17,12 +17,12 @@ public class CargoFacade {
         return cargoApplication.buscarPorId(id);
     }
 
-    public ArrayList<Cargo> buscarTodos() {
+    public List<Cargo> buscarTodos() {
         return cargoApplication.buscarTodos();
     }
 
-    public void salvar(int id, String nomeCargo, float salario) {
-        cargoApplication.salvar(id, nomeCargo, salario);
+    public void salvar(Cargo cargo) {
+        cargoApplication.salvar(cargo);
     }
 
     public void atualizar(int id, Cargo cargoAtualizado) {
