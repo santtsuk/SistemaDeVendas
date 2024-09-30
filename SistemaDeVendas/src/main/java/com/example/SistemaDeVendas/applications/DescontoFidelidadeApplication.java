@@ -5,6 +5,7 @@ import com.example.SistemaDeVendas.entities.DescontoFidelidade;
 import com.example.SistemaDeVendas.interfacies.IDescontoFidelidade;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DescontoFidelidadeApplication implements IDescontoFidelidade{
 
@@ -21,13 +22,13 @@ public class DescontoFidelidadeApplication implements IDescontoFidelidade{
     }
 
     
-    public ArrayList<DescontoFidelidade> buscarTodos() {
+    public List<DescontoFidelidade> buscarTodos() {
         return this.descontoFidelidadeRepository.buscarTodos();
     }
 
     
-    public void salvar(int id, Cliente idCliente, float valorDesconto, String dataAplicacao) {
-        this.descontoFidelidadeRepository.salvar(id, idCliente, valorDesconto, dataAplicacao);
+    public void salvar(DescontoFidelidade descontoFidelidade) {
+        this.descontoFidelidadeRepository.salvar(descontoFidelidade);
     }
 
     

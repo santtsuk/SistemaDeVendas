@@ -25,10 +25,8 @@ public class DescontoFidelidadeRepository implements IDescontoFidelidade {
     }
 
     @Override
-    public void salvar(int id, Cliente idCliente, float valorDesconto, String dataAplicacao) {
-
-        DescontoFidelidade descontoFidelidadeNovo = new DescontoFidelidade(id, idCliente, valorDesconto, dataAplicacao);
-        descontoFidelidades.add(descontoFidelidadeNovo);
+    public void salvar(DescontoFidelidade descontoFidelidade) {
+        descontoFidelidades.add(descontoFidelidade);
     }
 
     @Override

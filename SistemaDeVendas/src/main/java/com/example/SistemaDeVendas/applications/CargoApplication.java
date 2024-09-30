@@ -2,7 +2,8 @@ package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.Cargo;
 import com.example.SistemaDeVendas.interfacies.ICargo;
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class CargoApplication implements ICargo{
 
@@ -19,13 +20,13 @@ public class CargoApplication implements ICargo{
     }
 
     
-    public ArrayList<Cargo> buscarTodos() {
+    public List<Cargo> buscarTodos() {
         return this.cargoRepository.buscarTodos();
     }
 
     
-    public void salvar(int id, String nomeCargo, float salario) {
-        this.cargoRepository.salvar(id, nomeCargo, salario);
+    public void salvar(Cargo cargo) {
+        this.cargoRepository.salvar(cargo);
     }
 
     
@@ -36,4 +37,5 @@ public class CargoApplication implements ICargo{
     public void deletar(int id) {
         this.cargoRepository.deletar(id);
     }
+
 }

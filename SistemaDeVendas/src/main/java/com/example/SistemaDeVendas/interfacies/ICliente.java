@@ -1,17 +1,17 @@
 package com.example.SistemaDeVendas.interfacies;
 
-import com.example.SistemaDeVendas.entities.Cargo;
 import com.example.SistemaDeVendas.entities.Cliente;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ICliente {
 
     public Cliente buscarPorId(int id);
 
-    public ArrayList<Cliente> buscarTodos();
+    public List<Cliente> buscarTodos();
 
-    public void salvar(int id, String nome, String cpf, String telefone, String email, String endereco);
+    public void salvar(Cliente cliente);
 
     public void atualizar(int id, Cliente cliente);
 

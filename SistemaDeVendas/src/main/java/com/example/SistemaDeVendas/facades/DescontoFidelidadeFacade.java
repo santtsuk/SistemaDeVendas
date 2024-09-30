@@ -5,6 +5,7 @@ import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.entities.DescontoFidelidade;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DescontoFidelidadeFacade {
 
@@ -18,12 +19,12 @@ public class DescontoFidelidadeFacade {
         return descontoFidelidadeApplication.buscarPorId(id);
     }
 
-    public ArrayList<DescontoFidelidade> buscarTodos() {
+    public List<DescontoFidelidade> buscarTodos() {
         return descontoFidelidadeApplication.buscarTodos();
     }
 
-    public void salvar(int id, Cliente idCliente, float valorDesconto, String dataAplicacao) {
-        descontoFidelidadeApplication.salvar(id, idCliente, valorDesconto, dataAplicacao);
+    public void salvar(DescontoFidelidade descontoFidelidade) {
+        descontoFidelidadeApplication.salvar(descontoFidelidade);
     }
 
     public void atualizar(int id, DescontoFidelidade descontoAtualizado) {

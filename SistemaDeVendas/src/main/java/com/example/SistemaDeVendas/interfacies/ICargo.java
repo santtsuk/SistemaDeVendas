@@ -1,19 +1,20 @@
 package com.example.SistemaDeVendas.interfacies;
 
 import com.example.SistemaDeVendas.entities.Cargo;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ICargo {
 
     public Cargo buscarPorId(int id);
 
-    public ArrayList<Cargo> buscarTodos();
+    public List<Cargo> buscarTodos();
 
-    public void salvar(int id, String nomeCargo, float salario);
+    public void salvar(Cargo cargo);
 
     public void atualizar(int id, Cargo cargo);
+
 
     public void deletar(int id);
 

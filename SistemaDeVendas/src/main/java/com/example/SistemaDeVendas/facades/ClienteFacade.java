@@ -3,7 +3,7 @@ package com.example.SistemaDeVendas.facades;
 import com.example.SistemaDeVendas.applications.ClienteApplication;
 import com.example.SistemaDeVendas.entities.Cliente;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteFacade {
 
@@ -17,12 +17,12 @@ public class ClienteFacade {
         return clienteApplication.buscarPorId(id);
     }
 
-    public ArrayList<Cliente> buscarTodos() {
+    public List<Cliente> buscarTodos() {
         return clienteApplication.buscarTodos();
     }
 
-    public void salvar(int id, String nome, String cpf, String telefone, String email, String endereco) {
-        clienteApplication.salvar(id, nome, cpf, telefone, email, endereco);
+    public void salvar(Cliente cliente) {
+        clienteApplication.salvar(cliente);
     }
 
     public void atualizar(int id, Cliente clienteAtualizado) {
