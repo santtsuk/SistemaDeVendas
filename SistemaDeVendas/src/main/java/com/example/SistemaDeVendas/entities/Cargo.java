@@ -5,12 +5,15 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "cargo")
 public class Cargo {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "nome_cargo")
     private String nomeCargo;
+
     @Column(name = "salario")
     private float salario;
 

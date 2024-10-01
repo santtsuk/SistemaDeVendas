@@ -9,14 +9,19 @@ public class Cliente {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "nome")
     private String nome;
+
     @Column(name = "cpf")
     private String cpf;
+
     @Column(name = "telefone")
     private String telefone;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "endereco")
     private String endereco;
 
