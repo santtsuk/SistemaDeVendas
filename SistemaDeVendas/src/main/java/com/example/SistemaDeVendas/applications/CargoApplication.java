@@ -2,15 +2,19 @@ package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.Cargo;
 import com.example.SistemaDeVendas.interfacies.ICargo;
+import com.example.SistemaDeVendas.repositories.CargoRepositoryMySql;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CargoApplication implements ICargo{
 
-    private ICargo cargoRepository; 
+    private CargoRepositoryMySql cargoRepository;
 
-    
-    public CargoApplication(ICargo cargoRepository) {
+    @Autowired
+    public CargoApplication(CargoRepositoryMySql cargoRepository) {
         this.cargoRepository = cargoRepository;
     }
 

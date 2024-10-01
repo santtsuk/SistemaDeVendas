@@ -9,25 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ClienteController {
 
     private ClienteFacade clienteFacade;
 
-    public void inicializarProdutos() {
-        clienteFacade.salvar(1,"jorge","123456789","75984623345","jorge@gmail.com","rua 5,casa 65");
-    }
+
 
     @Autowired
     public ClienteController(ClienteFacade clienteFacade) {
         this.clienteFacade = clienteFacade;
-        inicializarProdutos();
     }
 
     @GetMapping("/buscarClientes")
-    public ResponseEntity<ArrayList<Cliente>> buscarTodos() {
-        ArrayList<Cliente> clientes = clienteFacade.buscarTodos();
+    public ResponseEntity<List<Cliente>> buscarTodos() {
+        List<Cliente> clientes = clienteFacade.buscarTodos();
 
         return ResponseEntity.ok(clientes);
     }

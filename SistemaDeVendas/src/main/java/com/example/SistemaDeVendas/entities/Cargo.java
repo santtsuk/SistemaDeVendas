@@ -17,13 +17,14 @@ public class Cargo {
     @Column(name = "salario")
     private float salario;
 
-    public Cargo() {
-    }
 
     public Cargo(int id, String nomeCargo, float salario) {
         this.id = id;
         this.nomeCargo = nomeCargo;
         this.salario = salario;
+    }
+
+    public Cargo() {
     }
 
     public int getId() {

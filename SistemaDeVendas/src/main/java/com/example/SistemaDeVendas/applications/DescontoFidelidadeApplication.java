@@ -3,16 +3,19 @@ package com.example.SistemaDeVendas.applications;
 import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.entities.DescontoFidelidade;
 import com.example.SistemaDeVendas.interfacies.IDescontoFidelidade;
+import com.example.SistemaDeVendas.repositories.DescontoFidelidadeRepositoryMySql;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class DescontoFidelidadeApplication implements IDescontoFidelidade{
 
-    private IDescontoFidelidade descontoFidelidadeRepository;
+    private DescontoFidelidadeRepositoryMySql descontoFidelidadeRepository;
 
-    
-    public DescontoFidelidadeApplication(IDescontoFidelidade descontoFidelidadeRepository) {
+    @Autowired
+    public DescontoFidelidadeApplication(DescontoFidelidadeRepositoryMySql descontoFidelidadeRepository) {
         this.descontoFidelidadeRepository = descontoFidelidadeRepository;
     }
 
