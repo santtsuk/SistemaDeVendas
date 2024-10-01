@@ -1,10 +1,23 @@
 package com.example.SistemaDeVendas.entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pagamento")
 public class Pagamento {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "id_pedido")
     private Pedido idPedido;
+
+    @Column(name = "id_pagamento")
     private TipoPagamento idPagamento;
+
+    @Column(name = "valor")
     private float valor;
 
     public Pagamento(int id, Pedido idPedido, TipoPagamento idPagamento, float valor) {
