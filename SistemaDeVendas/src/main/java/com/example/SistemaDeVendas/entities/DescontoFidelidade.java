@@ -9,17 +9,18 @@ public class DescontoFidelidade {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "id_Cliente")
-    private int idCliente;
+
+    @ManyToOne
+    @JoinColumn (name = "id_Cliente")
+    private Cliente cliente;
     @Column(name = "valor_Desconto")
     private float valorDesconto;
     @Column(name = "data_Aplicacao")
     private String dataAplicacao;
 
-
-    public DescontoFidelidade(int id, int idCliente, float valorDesconto, String dataAplicacao) {
+    public DescontoFidelidade(int id, Cliente cliente, float valorDesconto, String dataAplicacao) {
         this.id = id;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
         this.valorDesconto = valorDesconto;
         this.dataAplicacao = dataAplicacao;
     }
@@ -35,12 +36,12 @@ public class DescontoFidelidade {
         this.id = id;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public Cliente getIdCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setIdCliente(Cliente idCliente) {
+        this.cliente = idCliente;
     }
 
     public float getValorDesconto() {

@@ -1,12 +1,10 @@
 package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.DescontoFidelidadeApplication;
-import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.entities.DescontoFidelidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 @Component
 public class DescontoFidelidadeFacade {
@@ -26,15 +24,18 @@ public class DescontoFidelidadeFacade {
         return descontoFidelidadeApplication.buscarTodos();
     }
 
-    public void salvar(DescontoFidelidade descontoFidelidade) {
+    public DescontoFidelidade salvar(DescontoFidelidade descontoFidelidade) {
         descontoFidelidadeApplication.salvar(descontoFidelidade);
+        return descontoFidelidade;
     }
 
-    public void atualizar(int id, DescontoFidelidade descontoAtualizado) {
+    public DescontoFidelidade atualizar(int id, DescontoFidelidade descontoAtualizado) {
         descontoFidelidadeApplication.atualizar(id, descontoAtualizado);
+        return descontoAtualizado;
     }
 
-    public void deletar(int id) {
+    public boolean deletar(int id) {
         descontoFidelidadeApplication.deletar(id);
+        return false;
     }
 }

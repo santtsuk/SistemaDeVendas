@@ -23,15 +23,18 @@ public class ClienteFacade {
         return clienteApplication.buscarTodos();
     }
 
-    public void salvar(Cliente cliente) {
+    public Cliente salvar(Cliente cliente) {
         clienteApplication.salvar(cliente);
+        return cliente;
     }
 
-    public void atualizar(int id, Cliente clienteAtualizado) {
+    public Cliente atualizar(int id, Cliente clienteAtualizado) {
         clienteApplication.atualizar(id, clienteAtualizado);
+        return clienteAtualizado;
     }
 
-    public void deletar(int id) {
+    public boolean deletar(int id) {
         clienteApplication.deletar(id);
+        return false;
     }
 }
