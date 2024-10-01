@@ -2,13 +2,15 @@ package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.ClienteApplication;
 import com.example.SistemaDeVendas.entities.Cliente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class ClienteFacade {
 
     private ClienteApplication clienteApplication;
-
+    @Autowired
     public ClienteFacade(ClienteApplication clienteApplication) {
         this.clienteApplication = clienteApplication;
     }

@@ -2,16 +2,19 @@ package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.interfacies.ICliente;
+import com.example.SistemaDeVendas.repositories.ClienteRepositoryMySql;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class ClienteApplication {
 
-    private ICliente clienteRepository;
+    private ClienteRepositoryMySql clienteRepository;
 
-    
-    public ClienteApplication(ICliente clienteRepository) {
+    @Autowired
+    public ClienteApplication(ClienteRepositoryMySql clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
 
