@@ -23,15 +23,18 @@ public class CargoFacade {
         return cargoApplication.buscarTodos();
     }
 
-    public void salvar(Cargo cargo) {
+    public Cargo salvar(Cargo cargo) {
         cargoApplication.salvar(cargo);
+        return cargo;
     }
 
-    public void atualizar(int id, Cargo cargoAtualizado) {
+    public Cargo atualizar(int id, Cargo cargoAtualizado) {
         cargoApplication.atualizar(id, cargoAtualizado);
+        return cargoAtualizado;
     }
 
-    public void deletar(int id) {
+    public boolean deletar(int id) {
         cargoApplication.deletar(id);
+        return false;
     }
 }

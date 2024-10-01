@@ -2,6 +2,8 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -19,6 +21,8 @@ public class Cliente {
     private String email;
     @Column(name = "endereco")
     private String endereco;
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    private List<DescontoFidelidade> descontos;
 
 
     public Cliente(int id, String nome, String cpf, String telefone, String email, String endereco) {
