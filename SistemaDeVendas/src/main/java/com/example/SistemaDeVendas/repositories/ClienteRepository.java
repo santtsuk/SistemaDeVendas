@@ -46,5 +46,4 @@ public class ClienteRepository implements ICliente {
 
         clientes.removeIf(delete -> delete.getId() == id);
     }
-
 }

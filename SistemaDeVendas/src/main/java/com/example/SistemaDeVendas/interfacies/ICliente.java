@@ -1,7 +1,6 @@
 package com.example.SistemaDeVendas.interfacies;
 
 import com.example.SistemaDeVendas.entities.Cliente;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

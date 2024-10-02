@@ -16,4 +16,5 @@ public class SistemaDeVendasApplication {
 		SpringApplication.run(SistemaDeVendasApplication.class, args);
 
 	}
+
 }

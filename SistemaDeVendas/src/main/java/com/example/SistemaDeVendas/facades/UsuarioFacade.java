@@ -2,36 +2,38 @@ package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.UsuarioApplication;
 import com.example.SistemaDeVendas.entities.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.List;
 
+@Component
 public class UsuarioFacade {
     private UsuarioApplication usuarioApplication;
 
-
+    @Autowired
     public UsuarioFacade(UsuarioApplication usuarioApplication) {
         this.usuarioApplication = usuarioApplication;
     }
 
     public Usuario buscarPorId(int id) {
-        return this.usuarioApplication.buscarPorId(id);
+        return usuarioApplication.buscarPorId(id);
     }
 
-    public ArrayList<Usuario> buscarTodos() {
-        return this.usuarioApplication.buscarTodos();
+    public List<Usuario> buscarTodos() {
+        return usuarioApplication.buscarTodos();
     }
 
-    public void salvar(int id, String cpf, String nome, String senha, String cargo, String setor) {
-        this.usuarioApplication.salvar(id, cpf, nome, senha, cargo, setor);
+    public void salvar(Usuario usuario) {
+        usuarioApplication.salvar(usuario);
     }
 
     public void atualizar(int id, Usuario usuarioAtualizado) {
-        this.usuarioApplication.atualizar(id, usuarioAtualizado);
+        usuarioApplication.atualizar(id, usuarioAtualizado);
     }
 
     public void deletar(int id) {
-        this.usuarioApplication.deletar(id);
+        usuarioApplication.deletar(id);
     }
-
 }
 

@@ -4,6 +4,7 @@ import com.example.SistemaDeVendas.entities.Usuario;
 import com.example.SistemaDeVendas.interfacies.IUsuario;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioRepository implements IUsuario {
 
@@ -13,20 +14,19 @@ public class UsuarioRepository implements IUsuario {
     public Usuario buscarPorId(int id) {
 
         Usuario buscarUsuario = usuarios.stream().filter(p -> p.getId() == id).findFirst().get();
+
         return buscarUsuario;
     }
 
     @Override
-    public ArrayList<Usuario> buscarTodos() {
+    public List<Usuario> buscarTodos() {
 
         return usuarios;
     }
 
     @Override
-    public void salvar(int id, String cpf, String nome, String senha, String cargo, String setor) {
-
-        Usuario usuarioNovo = new Usuario(id, cpf, nome, senha, cargo, setor);
-        usuarios.add(usuarioNovo);
+    public void salvar(Usuario usuario) {
+        usuarios.add(usuario);
     }
 
     @Override
@@ -46,4 +46,8 @@ public class UsuarioRepository implements IUsuario {
 
         usuarios.removeIf(delete -> delete.getId() == id);
     }
+
+    public void deletAll(){
+
+    };
 }

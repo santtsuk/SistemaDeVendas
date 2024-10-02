@@ -29,7 +29,6 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<DescontoFidelidade> descontos;
 
-
     public Cliente(int id, String nome, String cpf, String telefone, String email, String endereco) {
         this.id = id;
         this.nome = nome;

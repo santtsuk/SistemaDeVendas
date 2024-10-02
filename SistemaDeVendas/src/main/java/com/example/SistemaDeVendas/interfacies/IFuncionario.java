@@ -15,4 +15,5 @@ public interface IFuncionario {
     public void atualizar(int id, Funcionario funcionario);
 
     public void deletar(int id);
+
 }

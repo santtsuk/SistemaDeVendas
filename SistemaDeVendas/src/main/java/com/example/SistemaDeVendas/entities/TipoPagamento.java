@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = TipoPagamento)
 public class TipoPagamento {
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +20,6 @@ public class TipoPagamento {
 
     public TipoPagamento() {
     }
-
 
     public int getId() {
         return id;

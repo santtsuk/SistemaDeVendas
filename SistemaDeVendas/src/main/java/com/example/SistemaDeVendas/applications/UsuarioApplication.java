@@ -1,16 +1,19 @@
 package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.Usuario;
-import com.example.SistemaDeVendas.interfacies.IUsuario;
+import com.example.SistemaDeVendas.repositories.UsuarioRepositoryMySql;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
+@Service
 public class UsuarioApplication {
 
-    private IUsuario usuarioRepository;
+    private UsuarioRepositoryMySql usuarioRepository;
 
-
-    public UsuarioApplication( IUsuario usuarioRepository) {
+    @Autowired
+    public UsuarioApplication(UsuarioRepositoryMySql usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
@@ -18,12 +21,12 @@ public class UsuarioApplication {
         return this.usuarioRepository.buscarPorId(id);
     }
 
-    public ArrayList<Usuario> buscarTodos() {
+    public List<Usuario> buscarTodos() {
         return this.usuarioRepository.buscarTodos();
     }
 
-    public void salvar(int id, String cpf, String nome, String senha, String cargo, String setor) {
-        this.usuarioRepository.salvar(id, cpf, nome, senha, cargo, setor);
+    public void salvar(Usuario usuario) {
+        this.usuarioRepository.salvar(usuario);
     }
 
     public void atualizar(int id, Usuario usuarioAtualizado) {
