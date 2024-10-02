@@ -25,7 +25,6 @@ public class Cliente {
     @Column(name = "endereco")
     private String endereco;
 
-
     public Cliente(int id, String nome, String cpf, String telefone, String email, String endereco) {
         this.id = id;
         this.nome = nome;

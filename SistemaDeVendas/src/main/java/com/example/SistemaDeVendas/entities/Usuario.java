@@ -1,17 +1,28 @@
 package com.example.SistemaDeVendas.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "cpf")
     private String cpf;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "cargo")
     private String senha;
+
+    @Column(name = "cargo")
     private String cargo;
+
+    @Column(name = "setor")
     private String setor;
 
     public Usuario(int id, String cpf, String nome, String senha, String cargo, String setor) {
