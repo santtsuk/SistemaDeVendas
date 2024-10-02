@@ -12,14 +12,10 @@ import java.util.ArrayList;
 public class FuncionarioController {
     private FuncionarioFacade funcionarioFacade;
 
-    public void inicializarProdutos() {
-        funcionarioFacade.salvar(1,"Deivid Victor","071.881.045-73","Auxiliar de Escritrório", "Administrativo", "27/09/2024");
-    }
 
     @Autowired
     public FuncionarioController(FuncionarioFacade funcionarioFacade) {
         this.funcionarioFacade = funcionarioFacade;
-        inicializarProdutos();
     }
 
     @GetMapping("/buscarFuncionario")

@@ -12,14 +12,9 @@ import java.util.ArrayList;
 public class ProdutoController {
     private ProdutoFacade produtoFacade;
 
-    public void inicializarProdutos() {
-        produtoFacade.salvar(0,"02/02/2002","produto0","descricao0",0.00,0,0);
-    }
-
     @Autowired
     public ProdutoController(ProdutoFacade produtoFacade) {
         this.produtoFacade = produtoFacade;
-        inicializarProdutos();
     }
 
     @GetMapping("/buscarPedido")

@@ -12,14 +12,10 @@ import java.util.ArrayList;
 public class ItemPedidoController {
     private ItemPedidoFacade itemPedidoFacade;
 
-    public void inicializarProdutos() {
-        itemPedidoFacade.salvar(1,"" ,"",1,1.0 );
-    }
 
     @Autowired
     public ItemPedidoController(ItemPedidoFacade itemPedidoFacade) {
         this.itemPedidoFacade = itemPedidoFacade;
-        inicializarProdutos();
     }
 
     @GetMapping("/buscarItemPedido")

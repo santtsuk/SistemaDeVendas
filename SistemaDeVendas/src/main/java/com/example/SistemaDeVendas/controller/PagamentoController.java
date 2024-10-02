@@ -12,14 +12,9 @@ import java.util.ArrayList;
 public class PagamentoController {
     private PagamentoFacade pagamentoFacade;
 
-    public void inicializarProdutos() {
-        pagamentoFacade.salvar(1,"auxiliar Administrativo",1412);
-    }
-
     @Autowired
     public PagamentoController(PagamentoFacade pagamentoFacade) {
         this.pagamentoFacade = pagamentoFacade;
-        inicializarProdutos();
     }
 
     @GetMapping("/buscarPagamento")

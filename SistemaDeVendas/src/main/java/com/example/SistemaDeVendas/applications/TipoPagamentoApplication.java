@@ -1,7 +1,6 @@
 package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.TipoPagamento;
-import com.example.SistemaDeVendas.interfacies.IProduto;
 import com.example.SistemaDeVendas.interfacies.ITipoPagamento;
 
 import java.util.ArrayList;

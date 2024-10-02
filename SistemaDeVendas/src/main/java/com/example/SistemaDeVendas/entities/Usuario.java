@@ -1,5 +1,10 @@
 package com.example.SistemaDeVendas.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "usuario")
 public class Usuario {
 
     private int id;
@@ -16,6 +21,9 @@ public class Usuario {
         this.senha = senha;
         this.cargo = cargo;
         this.setor = setor;
+    }
+
+    public Usuario() {
     }
 
     public int getId() {

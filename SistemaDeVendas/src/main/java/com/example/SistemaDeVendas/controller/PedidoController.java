@@ -12,14 +12,9 @@ import java.util.ArrayList;
 public class PedidoController {
     private PedidoFacade pedidoFacade;
 
-    public void inicializarProdutos() {
-        pedidoFacade.salvar(0,"02/02/2002",0,100,0,0);
-    }
-
     @Autowired
     public PedidoController(PedidoFacade pedidoFacade) {
         this.pedidoFacade = pedidoFacade;
-        inicializarProdutos();
     }
 
     @GetMapping("/buscarPedido")

@@ -1,7 +1,6 @@
 package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.Cliente;
-import com.example.SistemaDeVendas.interfacies.ICliente;
 import com.example.SistemaDeVendas.repositories.ClienteRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
