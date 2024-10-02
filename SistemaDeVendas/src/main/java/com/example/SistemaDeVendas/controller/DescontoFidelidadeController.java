@@ -22,14 +22,12 @@ public class DescontoFidelidadeController {
     @GetMapping("/buscarDescontosFidelidades")
     public ResponseEntity<List<DescontoFidelidade>> buscarTodos() {
         List<DescontoFidelidade> descontosFidelidades = descontoFidelidadeFacade.buscarTodos();
-
         return ResponseEntity.ok(descontosFidelidades);
     }
 
     @GetMapping("/buscarDescontoFidelidade/{id}")
     public ResponseEntity<DescontoFidelidade> buscarPorId(@PathVariable int id) {
         DescontoFidelidade descontoFidelidade = descontoFidelidadeFacade.buscarPorId(id);
-
         return ResponseEntity.ok(descontoFidelidade);
     }
     @PostMapping
