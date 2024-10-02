@@ -35,6 +35,11 @@ public class CargoApplication implements ICargo{
 
     
     public void atualizar(int id, Cargo cargo) {
+        Cargo cargoInDB = this.cargoRepository.buscarPorId(id);
+
+        if (cargoInDB == null)
+            return;
+
         this.cargoRepository.atualizar(id, cargo);
     }
     
