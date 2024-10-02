@@ -1,6 +1,5 @@
 package com.example.SistemaDeVendas.applications;
 
-import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.entities.DescontoFidelidade;
 import com.example.SistemaDeVendas.interfacies.IDescontoFidelidade;
 import com.example.SistemaDeVendas.repositories.DescontoFidelidadeRepositoryMySql;

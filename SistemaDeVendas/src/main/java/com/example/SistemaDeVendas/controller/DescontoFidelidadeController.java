@@ -1,8 +1,6 @@
 package com.example.SistemaDeVendas.controller;
 
-import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.entities.DescontoFidelidade;
-import com.example.SistemaDeVendas.facades.ClienteFacade;
 import com.example.SistemaDeVendas.facades.DescontoFidelidadeFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
