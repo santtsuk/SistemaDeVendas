@@ -25,8 +25,8 @@ public class FuncionarioFacade {
         return funcionarioApplication.buscarTodos();
     }
 
-    public void salvar(int id, String nome, String cpf, String cargo, String setor, String dataAdimissao) {
-        this.funcionarioApplication.salvar(id, nome, cpf, cargo, setor, dataAdimissao);
+    public void salvar(Funcionario funcionario) {
+        FuncionarioApplication.salvar(funcionario);
     }
 
     public void atualizar(int id, Funcionario funcionarioAtualizado) {
