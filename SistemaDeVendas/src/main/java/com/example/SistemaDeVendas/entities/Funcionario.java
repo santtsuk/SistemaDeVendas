@@ -43,11 +43,11 @@ public class Funcionario {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getNomeFuncionario() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNomeFuncionario(String nome) {
         this.nome = nome;
     }
 

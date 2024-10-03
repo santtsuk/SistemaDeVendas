@@ -1,11 +1,12 @@
 package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.FuncionarioApplication;
+import com.example.SistemaDeVendas.entities.Cargo;
 import com.example.SistemaDeVendas.entities.Funcionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class FuncionarioFacade {
@@ -21,8 +22,8 @@ public class FuncionarioFacade {
         return this.funcionarioApplication.buscarPorId(id);
     }
 
-    public ArrayList<Funcionario> buscarTodos() {
-        return this.funcionarioApplication.buscarTodos();
+    public List<Funcionario> buscarTodos() {
+        return funcionarioApplication.buscarTodos();
     }
 
     public void salvar(int id, String nome, String cpf, String cargo, String setor, String dataAdimissao) {
