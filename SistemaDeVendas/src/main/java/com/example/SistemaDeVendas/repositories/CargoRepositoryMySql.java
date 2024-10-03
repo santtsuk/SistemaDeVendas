@@ -61,4 +61,3 @@ public class CargoRepositoryMySql implements ICargo {
         query.executeUpdate();
     }
 }
-
