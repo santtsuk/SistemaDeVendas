@@ -26,8 +26,8 @@ public class FuncionarioApplication implements IFuncionario {
         return this.funcionarioRepository.buscarTodos();
     }
 
-    public void salvar(int id, String nome, String cpf, String cargo, String setor, String dataAdimissao) {
-        this.funcionarioRepository.salvar(id, nome, cpf, cargo, setor, dataAdimissao);
+    public void salvar(Funcionario funcionario) {
+        this.funcionarioRepository.salvar(funcionario);
     }
 
     public void atualizar(int id, Funcionario funcionario) {

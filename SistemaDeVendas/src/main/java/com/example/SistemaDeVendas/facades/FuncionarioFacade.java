@@ -1,7 +1,6 @@
 package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.FuncionarioApplication;
-import com.example.SistemaDeVendas.entities.Cargo;
 import com.example.SistemaDeVendas.entities.Funcionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

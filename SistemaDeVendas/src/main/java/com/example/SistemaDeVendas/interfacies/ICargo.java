@@ -15,7 +15,5 @@ public interface ICargo {
 
     public void atualizar(int id, Cargo cargo);
 
-
     public void deletar(int id);
-
 }

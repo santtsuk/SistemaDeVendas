@@ -10,7 +10,7 @@ public interface IFuncionario {
 
     public List<Funcionario> buscarTodos();
 
-    public void salvar(int id, String nome, String cpf, String cargo, String setor, String dataAdimissao);
+    public void salvar(Funcionario funcionario);
 
     public void atualizar(int id, Funcionario funcionario);
 
