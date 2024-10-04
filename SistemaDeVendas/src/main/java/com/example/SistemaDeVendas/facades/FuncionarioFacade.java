@@ -26,7 +26,7 @@ public class FuncionarioFacade {
     }
 
     public void salvar(Funcionario funcionario) {
-        FuncionarioApplication.salvar(funcionario);
+        funcionarioApplication.salvar(funcionario);
     }
 
     public void atualizar(int id, Funcionario funcionarioAtualizado) {
