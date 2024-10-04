@@ -43,7 +43,7 @@ public class CargoRepositoryMySql implements ICargo {
         Cargo cargoInDB = this.entityManager.find(Cargo.class, id);
 
         cargoInDB.setNomeCargo(cargo.getNomeCargo());
-        cargoInDB.setSalario(cargo.getSalario()); // Corrigido
+        cargoInDB.setSalario(cargo.getSalario());
         this.entityManager.merge(cargoInDB);
     }
 
