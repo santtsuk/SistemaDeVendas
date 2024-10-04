@@ -16,7 +16,7 @@ public class FuncionarioFacade {
     public FuncionarioFacade(FuncionarioApplication funcionarioApplication) {
         this.funcionarioApplication = funcionarioApplication;
     }
-
+    // ededdd
     public Funcionario buscarPorId(int id) {
         return this.funcionarioApplication.buscarPorId(id);
     }
