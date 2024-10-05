@@ -18,26 +18,31 @@ public class CargoApplication implements ICargo{
         this.cargoRepository = cargoRepository;
     }
 
-    
+
     public Cargo buscarPorId(int id) {
         return this.cargoRepository.buscarPorId(id);
     }
 
-    
+
     public List<Cargo> buscarTodos() {
         return this.cargoRepository.buscarTodos();
     }
 
-    
+
     public void salvar(Cargo cargo) {
         this.cargoRepository.salvar(cargo);
     }
 
-    
+
     public void atualizar(int id, Cargo cargo) {
+        Cargo cargoInDB = this.cargoRepository.buscarPorId(id);
+
+        if (cargoInDB == null)
+            return;
+
         this.cargoRepository.atualizar(id, cargo);
     }
-    
+
     public void deletar(int id) {
         this.cargoRepository.deletar(id);
     }
