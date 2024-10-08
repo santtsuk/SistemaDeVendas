@@ -41,10 +41,11 @@ public class CargoRepositoryMySql implements ICargo {
     @Override
     public void atualizar(int id, Cargo cargo) {
         Cargo cargoInDB = this.entityManager.find(Cargo.class, id);
-
-        cargoInDB.setNomeCargo(cargo.getNomeCargo());
-        cargoInDB.setSalario(cargo.getSalario());
-        this.entityManager.merge(cargoInDB);
+        if (cargoInDB != null) {
+            cargoInDB.setNomeCargo(cargo.getNomeCargo());
+            cargoInDB.setSalario(cargo.getSalario()); // Corrigido
+            this.entityManager.merge(cargoInDB);
+        }
     }
 
     @Transactional
@@ -61,3 +62,4 @@ public class CargoRepositoryMySql implements ICargo {
         query.executeUpdate();
     }
 }
+

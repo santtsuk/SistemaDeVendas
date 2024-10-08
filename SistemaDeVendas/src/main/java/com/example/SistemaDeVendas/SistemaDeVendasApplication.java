@@ -12,7 +12,8 @@ import java.util.List;
 @SpringBootApplication
 public class SistemaDeVendasApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SistemaDeVendasApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(SistemaDeVendasApplication.class, args);
+
+	}
 }
