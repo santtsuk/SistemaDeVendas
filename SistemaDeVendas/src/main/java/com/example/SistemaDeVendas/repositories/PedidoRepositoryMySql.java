@@ -1,7 +1,6 @@
 package com.example.SistemaDeVendas.repositories;
 
 import com.example.SistemaDeVendas.entities.Pedido;
-import com.example.SistemaDeVendas.entities.Produto;
 import com.example.SistemaDeVendas.interfacies.IPedido;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -15,7 +14,7 @@ import java.util.List;
 @Repository
 public class PedidoRepositoryMySql implements IPedido {
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public PedidoRepositoryMySql(EntityManager entityManager) {

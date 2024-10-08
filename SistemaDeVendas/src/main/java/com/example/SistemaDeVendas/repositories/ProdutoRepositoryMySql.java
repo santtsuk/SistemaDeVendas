@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class ProdutoRepositoryMySql implements IProduto {
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public ProdutoRepositoryMySql(EntityManager entityManager) {

@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class ProdutoApplication implements IProduto {
 
-    private ProdutoRepositoryMySql produtoRepository;
+    private final ProdutoRepositoryMySql produtoRepository;
 
     @Autowired
     public ProdutoApplication(ProdutoRepositoryMySql produtoRepository) {

@@ -27,7 +27,6 @@ public class Pedido {
     private int idUsuario;
 
     public Pedido() {
-
     }
 
     public Pedido(int id, String dataPedido, int idCliente, float valorTotal, int idPagamento, int idUsuario) {
