@@ -1,12 +1,29 @@
 package com.example.SistemaDeVendas.entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "funcionario")
 public class Funcionario {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "cpf")
     private String cpf;
+
+    @Column(name = "cargo")
     private String cargo;
+
+    @Column(name = "setor")
     private String setor;
+
+    @Column(name = "data_adimissao")
     private String dataAdimissao;
 
     public Funcionario(int id, String nome, String cpf, String cargo, String setor, String dataAdimissao) {
@@ -26,11 +43,11 @@ public class Funcionario {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getNomeFuncionario() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNomeFuncionario(String nome) {
         this.nome = nome;
     }
 

@@ -1,18 +1,19 @@
 package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.ItemPedido;
-import com.example.SistemaDeVendas.entities.Pedido;
-import com.example.SistemaDeVendas.entities.Produto;
-import com.example.SistemaDeVendas.interfacies.IItemPedido;
+import com.example.SistemaDeVendas.repositories.ItemPedidoRepositoryMySql;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ItemPedidoApplication {
+@Service
+public class ItemPedidoApplication implements ItemPedido {
 
-    private IItemPedido itemPedidoRepository;
+    private ItemPedidoRepositoryMySql itemPedidoRepository;
 
-
-    public ItemPedidoApplication(IItemPedido itemPedidoRepository) {
+    @Autowired
+    public ItemPedidoApplication(ItemPedidoRepositoryMySql itemPedidoRepository) {
         this.itemPedidoRepository = itemPedidoRepository;
     }
 
@@ -20,19 +21,21 @@ public class ItemPedidoApplication {
         return this.itemPedidoRepository.buscarPorId(id);
     }
 
-
-    public ArrayList<ItemPedido> buscarTodos() {
+    public List<ItemPedido> buscarTodos() {
         return this.itemPedidoRepository.buscarTodos();
     }
 
-
-    public void salvar(int id, Pedido idPedido, Produto idProduto, int quantidade, float precoUnitario) {
-        this.itemPedidoRepository.salvar(id, idPedido, idProduto, quantidade, precoUnitario);
+    public void salvar(ItemPedido itemPedido) {
+        this.itemPedidoRepository.salvar(itemPedido);
     }
 
+    public void atualizar(int id, ItemPedido itemPedido) {
+        ItemPedido ItemPedidoInDB = this.itemPedidoRepository.buscarPorId(id);
 
-    public void atualizar(int id, ItemPedido itemPedidoAtualizado) {
-        this.itemPedidoRepository.atualizar(id, itemPedidoAtualizado);
+        if (ItemPedidoInDB == null)
+            return;
+
+        this.itemPedidoRepository.atualizar(id, cargo);
     }
 
     public void deletar(int id) {

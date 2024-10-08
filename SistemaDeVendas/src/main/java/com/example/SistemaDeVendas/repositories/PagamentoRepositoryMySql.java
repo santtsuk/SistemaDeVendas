@@ -12,52 +12,53 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class CargoRepositoryMySql implements ICargo {
+public class PagamentoRepositoryMySql implements IPagamento {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-    public CargoRepositoryMySql(EntityManager entityManager) {
+    public PagamentoRepositoryMySql(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Transactional
     @Override
-    public void salvar(Cargo cargo) {
-        this.entityManager.persist(cargo);
+    public void salvar(Pagamento pagamento) {
+        this.entityManager.persist(pagamento);
     }
 
     @Override
-    public Cargo buscarPorId(int id) {
-        return this.entityManager.find(Cargo.class, id);
+    public Pagamento buscarPorId(int id) {
+        return this.entityManager.find(Pagamento.class, id);
     }
 
     @Override
-    public List<Cargo> buscarTodos() {
-        return entityManager.createQuery("select c from Cargo c ORDER BY c.nomeCargo", Cargo.class).getResultList();
+    public List<Pagamento> buscarTodos() {
+        return entityManager.createQuery("select p from Pagamento p ORDER BY p.nomePagamento", Cargo.class).getResultList();
     }
 
     @Transactional
     @Override
-    public void atualizar(int id, Cargo cargo) {
-        Cargo cargoInDB = this.entityManager.find(Cargo.class, id);
+    public void atualizar(int id, Pagamento pagamento) {
+        Pagamento pagamentoInDB = this.entityManager.find(Pagamento.class, id);
 
-        cargoInDB.setNomeCargo(cargo.getNomeCargo());
-        cargoInDB.setSalario(cargo.getSalario());
+        pagamentoInDB.setIdPedido(pagamento.getIdPedido());
+        pagamentoInDB.setIdPagamento(pagamento.getIdPagamento());
+        pagamentoInDB.setValor(pagamento.getValor());
         this.entityManager.merge(cargoInDB);
     }
 
     @Transactional
     @Override
     public void deletar(int id) {
-        Query query = entityManager.createQuery("delete from Cargo c WHERE c.id = :id");
+        Query query = entityManager.createQuery("delete from Pagamento p WHERE p.id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
     }
 
     @Transactional
     public void deleteAll() {
-        Query query = entityManager.createQuery("delete from Cargo c");
+        Query query = entityManager.createQuery("delete from Pagamento p");
         query.executeUpdate();
     }
 }

@@ -27,6 +27,9 @@ public class Pagamento {
         this.valor = valor;
     }
 
+    public Pagamento() {
+    }
+
     public int getId() {return id;}
 
     public void setId(int id) {

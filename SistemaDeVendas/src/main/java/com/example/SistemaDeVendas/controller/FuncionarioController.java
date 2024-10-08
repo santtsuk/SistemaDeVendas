@@ -3,15 +3,14 @@ package com.example.SistemaDeVendas.controller;
 import com.example.SistemaDeVendas.entities.Funcionario;
 import com.example.SistemaDeVendas.facades.FuncionarioFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FuncionarioController {
-    private FuncionarioFacade funcionarioFacade;
-
+    private final FuncionarioFacade funcionarioFacade;
 
     @Autowired
     public FuncionarioController(FuncionarioFacade funcionarioFacade) {
@@ -19,16 +18,33 @@ public class FuncionarioController {
     }
 
     @GetMapping("/buscarFuncionario")
-    public ResponseEntity<ArrayList<Funcionario>> buscarTodos() {
-        ArrayList<Funcionario> funcionarios = funcionarioFacade.buscarTodos();
-
+    public ResponseEntity<List<Funcionario>> buscarTodos() {
+        List<Funcionario> funcionarios = funcionarioFacade.buscarTodos();
         return ResponseEntity.ok(funcionarios);
     }
 
-    @GetMapping("/buscarProduto/{id}")
+    @GetMapping("/buscarFuncionarios/{id}")
     public ResponseEntity<Funcionario> buscarPorId(@PathVariable int id) {
         Funcionario funcionario = funcionarioFacade.buscarPorId(id);
+        return funcionario != null ? ResponseEntity.ok(funcionario) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> salvar(@RequestBody Funcionario funcionario) {
+        funcionarioFacade.salvar(funcionario);
+        return new ResponseEntity(null, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Funcionario> atualizar(@PathVariable int id, @RequestBody Funcionario funcionario) {
+        funcionarioFacade.atualizar(id, funcionario);
 
         return ResponseEntity.ok(funcionario);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable int id) {
+        funcionarioFacade.deletar(id);
+        return ResponseEntity.ok(null);
     }
 }

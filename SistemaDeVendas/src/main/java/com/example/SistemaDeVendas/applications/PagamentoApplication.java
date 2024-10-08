@@ -2,15 +2,19 @@ package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.*;
 import com.example.SistemaDeVendas.interfacies.IPagamento;
+import com.example.SistemaDeVendas.repositories.CargoRepositoryMySql;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class PagamentoApplication {
+@Service
+public class PagamentoApplication implements IIPagamento {
 
-    private IPagamento pagamentoRepository;
+    private PagamentoRepositoryMySql pagamentoRepository;
 
-
-    public PagamentoApplication(IPagamento pagamentoRepository) {
+    Autowired
+    public PagamentoApplication(PagamentoRepositoryMySql pagamentoRepository) {
         this.pagamentoRepository = pagamentoRepository;
     }
 
@@ -18,19 +22,21 @@ public class PagamentoApplication {
         return this.pagamentoRepository.buscarPorId(id);
     }
 
-
-    public ArrayList<Pagamento> buscarTodos() {
+    public List<Pagamento> buscarTodos() {
         return this.pagamentoRepository.buscarTodos();
     }
 
-
-    public void salvar(int id, Pedido idPedido, TipoPagamento idPagamento, float valor) {
-        this.pagamentoRepository.salvar(id, idPedido, idPagamento, valor);
+    public void salvar(Pagamento pagamento) {
+        this.pagamentoRepository.salvar(pagamento);
     }
 
+    public void atualizar(int id, Pagamento pagamento) {
+        Pagamento pagamentoInDB = this.pagamentoRepository.buscarPorId(id);
 
-    public void atualizar(int id, Pagamento pagamentoAtualizado) {
-        this.pagamentoRepository.atualizar(id, pagamentoAtualizado);
+        if (pagamentoInDB == null)
+            return;
+
+        this.pagamentoRepository.atualizar(id, pagamento);
     }
 
     public void deletar(int id) {

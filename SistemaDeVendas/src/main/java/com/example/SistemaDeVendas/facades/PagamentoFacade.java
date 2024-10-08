@@ -5,38 +5,33 @@ import com.example.SistemaDeVendas.entities.Pagamento;
 import com.example.SistemaDeVendas.entities.Pedido;
 import com.example.SistemaDeVendas.entities.TipoPagamento;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PagamentoFacade {
 
-        private PagamentoApplication pagamentoApplication;
+    private PagamentoApplication pagamentoApplication;
+    @Autowired
+    public PagamentoFacade(PagamentoApplication pagamentoApplication) {
+        this.pagamentoApplication = pagamentoApplication;
+    }
 
+    public Pagamento buscarPorId(int id) {
+        return pagamentoApplication.buscarPorId(id);
+    }
 
-        public PagamentoFacade(PagamentoApplication pagamentoApplication) {
-            this.pagamentoApplication = pagamentoApplication;
-        }
+    public List<Pagamento> buscarTodos() {
+        return pagamentoApplication.buscarTodos();
+    }
 
-        public Pagamento buscarPorId(int id) {
-            return this.pagamentoApplication.buscarPorId(id);
-        }
+    public void salvar(Pagamento pagamento {
+        pagamentoApplication.salvar(pagamento);
+    }
 
+    public void atualizar(int id, Pagamento pagamentoAtualizado) {
+       pagamentoApplication.atualizar(id, pagamentoAtualizado);
+    }
 
-        public ArrayList<Pagamento> buscarTodos() {
-            return this.pagamentoApplication.buscarTodos();
-        }
-
-
-        public void salvar(int id, Pedido idPedido, TipoPagamento idPagamento, float valor) {
-            this.pagamentoApplication.salvar(id, idPedido, idPagamento, valor);
-        }
-
-
-        public void atualizar(int id, Pagamento pagamentoAtualizado) {
-            this.pagamentoApplication.atualizar(id, pagamentoAtualizado);
-        }
-
-        public void deletar(int id) {
-            this.pagamentoApplication.deletar(id);
-        }
-
+    public void deletar(int id) {
+        pagamentoApplication.deletar(id);
+    }
 }

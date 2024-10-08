@@ -31,6 +31,9 @@ public class ItemPedido {
         this.precoUnitario = precoUnitario;
     }
 
+    public ItemPedido() {
+    }
+
     public int getId() {
         return id;
     }
