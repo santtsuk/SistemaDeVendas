@@ -27,8 +27,8 @@ public class ItemPedidoFacade {
         return this.itemPedidoApplication.buscarTodos();
     }
 
-    public void salvar(ItemPedidoApplication itemPedidoApplication) {
-        ItemPedidApplication.salvar(itemPedidoApplication);
+    public void salvar(ItemPedido itemPedido) {
+        itemPedidoApplication.salvar(itemPedido);
     }
 
     public void atualizar(int id, ItemPedido itemPedidoAtualizado) {

@@ -4,6 +4,7 @@ import com.example.SistemaDeVendas.applications.PagamentoApplication;
 import com.example.SistemaDeVendas.entities.Pagamento;
 import com.example.SistemaDeVendas.entities.Pedido;
 import com.example.SistemaDeVendas.entities.TipoPagamento;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class PagamentoFacade {
         return pagamentoApplication.buscarTodos();
     }
 
-    public void salvar(Pagamento pagamento {
+    public void salvar(Pagamento pagamento) {
         pagamentoApplication.salvar(pagamento);
     }
 

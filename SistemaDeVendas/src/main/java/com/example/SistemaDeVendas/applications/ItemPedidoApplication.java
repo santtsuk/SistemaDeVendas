@@ -1,6 +1,7 @@
 package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.ItemPedido;
+import com.example.SistemaDeVendas.interfacies.IItemPedido;
 import com.example.SistemaDeVendas.repositories.ItemPedidoRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ItemPedidoApplication implements ItemPedido {
+public class ItemPedidoApplication implements IItemPedido {
 
     private ItemPedidoRepositoryMySql itemPedidoRepository;
 
@@ -35,7 +36,7 @@ public class ItemPedidoApplication implements ItemPedido {
         if (ItemPedidoInDB == null)
             return;
 
-        this.itemPedidoRepository.atualizar(id, cargo);
+        this.itemPedidoRepository.atualizar(id, itemPedido);
     }
 
     public void deletar(int id) {

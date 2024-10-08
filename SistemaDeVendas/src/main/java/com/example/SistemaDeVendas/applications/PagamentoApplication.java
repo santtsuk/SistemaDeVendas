@@ -3,17 +3,18 @@ package com.example.SistemaDeVendas.applications;
 import com.example.SistemaDeVendas.entities.*;
 import com.example.SistemaDeVendas.interfacies.IPagamento;
 import com.example.SistemaDeVendas.repositories.CargoRepositoryMySql;
+import com.example.SistemaDeVendas.repositories.PagamentoRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PagamentoApplication implements IIPagamento {
+public class PagamentoApplication implements IPagamento {
 
     private PagamentoRepositoryMySql pagamentoRepository;
 
-    Autowired
+    @Autowired
     public PagamentoApplication(PagamentoRepositoryMySql pagamentoRepository) {
         this.pagamentoRepository = pagamentoRepository;
     }

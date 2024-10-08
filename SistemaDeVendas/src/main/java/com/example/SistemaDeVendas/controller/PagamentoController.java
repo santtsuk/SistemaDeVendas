@@ -3,13 +3,14 @@ package com.example.SistemaDeVendas.controller;
 import com.example.SistemaDeVendas.entities.Pagamento;
 import com.example.SistemaDeVendas.facades.PagamentoFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/pagamento")
 public class PagamentoController {
     private final PagamentoFacade pagamentoFacade;
 
@@ -18,14 +19,14 @@ public class PagamentoController {
         this.pagamentoFacade = pagamentoFacade;
     }
 
-    @GetMapping("/buscarPagamento")
+    @GetMapping("/buscarTodos")
     public ResponseEntity<List<Pagamento>> buscarTodos() {
         List<Pagamento> pagamento = pagamentoFacade.buscarTodos();
 
         return ResponseEntity.ok(pagamento);
     }
 
-    @GetMapping("/buscarPagamento/{id}")
+    @GetMapping("/buscarPorID/{id}")
     public ResponseEntity<Pagamento> buscarPorId(@PathVariable int id) {
         Pagamento pagamento = pagamentoFacade.buscarPorId(id);
 

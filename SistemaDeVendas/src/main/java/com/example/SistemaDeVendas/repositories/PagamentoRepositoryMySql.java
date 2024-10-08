@@ -1,7 +1,8 @@
 package com.example.SistemaDeVendas.repositories;
 
 import com.example.SistemaDeVendas.entities.Cargo;
-import com.example.SistemaDeVendas.interfacies.ICargo;
+import com.example.SistemaDeVendas.entities.Pagamento;
+import com.example.SistemaDeVendas.interfacies.IPagamento;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -27,14 +28,13 @@ public class PagamentoRepositoryMySql implements IPagamento {
         this.entityManager.persist(pagamento);
     }
 
-    @Override
     public Pagamento buscarPorId(int id) {
         return this.entityManager.find(Pagamento.class, id);
     }
 
     @Override
     public List<Pagamento> buscarTodos() {
-        return entityManager.createQuery("select p from Pagamento p ORDER BY p.nomePagamento", Cargo.class).getResultList();
+        return entityManager.createQuery("select p from Pagamento p ORDER BY p.idPedido", Pagamento.class).getResultList();
     }
 
     @Transactional
@@ -45,7 +45,7 @@ public class PagamentoRepositoryMySql implements IPagamento {
         pagamentoInDB.setIdPedido(pagamento.getIdPedido());
         pagamentoInDB.setIdPagamento(pagamento.getIdPagamento());
         pagamentoInDB.setValor(pagamento.getValor());
-        this.entityManager.merge(cargoInDB);
+        this.entityManager.merge(pagamentoInDB);
     }
 
     @Transactional
