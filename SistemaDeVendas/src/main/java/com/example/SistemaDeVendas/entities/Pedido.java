@@ -15,18 +15,22 @@ public class Pedido {
     private String dataPedido;
 
     @Column(name = "id_cliente")
-    private Cliente idCliente;
+    private int idCliente;
 
     @Column(name = "valor_total")
     private float valorTotal;
 
     @Column(name = "id_pagamento")
-    private Pagamento idPagamento;
+    private int idPagamento;
 
     @Column(name = "id_usuario")
-    private Usuario idUsuario;
+    private int idUsuario;
 
-    public Pedido(int id, String dataPedido, Cliente idCliente, float valorTotal, Pagamento idPagamento, Usuario idUsuario) {
+    public Pedido() {
+
+    }
+
+    public Pedido(int id, String dataPedido, int idCliente, float valorTotal, int idPagamento, int idUsuario) {
         this.id = id;
         this.dataPedido = dataPedido;
         this.idCliente = idCliente;
@@ -51,11 +55,11 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public Cliente getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -67,19 +71,19 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public Pagamento getIdPagamentos() {
+    public int getIdPagamento() {
         return idPagamento;
     }
 
-    public void setIdPagamentos(Pagamento idPagamentos) {
-        this.idPagamento = idPagamentos;
+    public void setIdPagamento(int idPagamento) {
+        this.idPagamento = idPagamento;
     }
 
-    public Usuario getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 }

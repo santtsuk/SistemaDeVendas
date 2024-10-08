@@ -2,14 +2,14 @@ package com.example.SistemaDeVendas.interfacies;
 
 import com.example.SistemaDeVendas.entities.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IProduto {
     public Produto buscarPorId(int id);
 
-    public ArrayList<Produto> buscarTodos();
+    public List<Produto> buscarTodos();
 
-    public void salvar(int id, String codigoBarras, String nome, String descricao, float preco, int estoque, int minEstoque);
+    public void salvar(Produto produto);
 
     public void atualizar(int id, Produto produto);
 

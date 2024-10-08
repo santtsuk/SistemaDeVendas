@@ -1,19 +1,17 @@
 package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.PedidoApplication;
-import com.example.SistemaDeVendas.entities.Cliente;
-import com.example.SistemaDeVendas.entities.Pagamento;
-import com.example.SistemaDeVendas.entities.Pedido;
-import com.example.SistemaDeVendas.entities.Usuario;
+import com.example.SistemaDeVendas.applications.ProdutoApplication;
+import com.example.SistemaDeVendas.entities.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoFacade {
 
     private PedidoApplication pedidoApplication;
 
 
-    public PedidoFacade(PedidoApplication pedidoApplication) {
+    public PedidoFacade( PedidoApplication pedidoApplication) {
         this.pedidoApplication = pedidoApplication;
     }
 
@@ -22,13 +20,14 @@ public class PedidoFacade {
     }
 
 
-    public ArrayList<Pedido> buscarTodos() {
+    public List<Pedido> buscarTodos() {
         return this.pedidoApplication.buscarTodos();
     }
 
 
-    public void salvar(int id, String dataPedido, Cliente idCliente, float valorTotal, Pagamento idPagamento, Usuario idUsuario) {
-        this.pedidoApplication.salvar(id, dataPedido, idCliente, valorTotal, idPagamento, idUsuario);
+    public Pedido salvar(Pedido pedido) {
+        pedidoApplication.salvar(pedido);
+        return pedido;
     }
 
 

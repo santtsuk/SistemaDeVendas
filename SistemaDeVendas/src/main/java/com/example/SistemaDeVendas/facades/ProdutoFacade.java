@@ -2,10 +2,8 @@ package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.ProdutoApplication;
 import com.example.SistemaDeVendas.entities.*;
-import com.example.SistemaDeVendas.interfacies.IPedido;
-import com.example.SistemaDeVendas.interfacies.IProduto;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProdutoFacade {
 
@@ -21,13 +19,14 @@ public class ProdutoFacade {
     }
 
 
-    public ArrayList<Produto> buscarTodos() {
+    public List<Produto> buscarTodos() {
         return this.produtoApplication.buscarTodos();
     }
 
 
-    public void salvar(int id, String codigoBarras, String nome, String descricao, float preco, int estoque, int minEstoque) {
-        this.produtoApplication.salvar(id, codigoBarras, nome, descricao, preco, estoque, minEstoque);
+    public Produto salvar(Produto produto) {
+        produtoApplication.salvar(produto);
+        return produto;
     }
 
 
