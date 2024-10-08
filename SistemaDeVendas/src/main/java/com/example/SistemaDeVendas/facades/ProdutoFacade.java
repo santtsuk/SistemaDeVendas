@@ -9,8 +9,7 @@ public class ProdutoFacade {
 
     private ProdutoApplication produtoApplication;
 
-
-    public ProdutoFacade( ProdutoApplication produtoApplication) {
+    public ProdutoFacade(ProdutoApplication produtoApplication) {
         this.produtoApplication = produtoApplication;
     }
 
@@ -18,17 +17,14 @@ public class ProdutoFacade {
         return this.produtoApplication.buscarPorId(id);
     }
 
-
     public List<Produto> buscarTodos() {
         return this.produtoApplication.buscarTodos();
     }
-
 
     public Produto salvar(Produto produto) {
         produtoApplication.salvar(produto);
         return produto;
     }
-
 
     public void atualizar(int id, Produto produtoAtualizado) {
         this.produtoApplication.atualizar(id, produtoAtualizado);

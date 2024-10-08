@@ -10,8 +10,7 @@ public class PedidoFacade {
 
     private PedidoApplication pedidoApplication;
 
-
-    public PedidoFacade( PedidoApplication pedidoApplication) {
+    public PedidoFacade(PedidoApplication pedidoApplication) {
         this.pedidoApplication = pedidoApplication;
     }
 
@@ -19,17 +18,14 @@ public class PedidoFacade {
         return this.pedidoApplication.buscarPorId(id);
     }
 
-
     public List<Pedido> buscarTodos() {
         return this.pedidoApplication.buscarTodos();
     }
-
 
     public Pedido salvar(Pedido pedido) {
         pedidoApplication.salvar(pedido);
         return pedido;
     }
-
 
     public void atualizar(int id, Pedido pedidoAtualizado) {
         this.pedidoApplication.atualizar(id, pedidoAtualizado);

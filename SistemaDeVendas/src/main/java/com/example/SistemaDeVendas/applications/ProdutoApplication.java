@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-public class ProdutoApplication implements IProduto{
+public class ProdutoApplication implements IProduto {
 
     private ProdutoRepositoryMySql produtoRepository;
 
@@ -20,21 +19,17 @@ public class ProdutoApplication implements IProduto{
         this.produtoRepository = produtoRepository;
     }
 
-
     public Produto buscarPorId(int id) {
         return this.produtoRepository.buscarPorId(id);
     }
-
 
     public List<Produto> buscarTodos() {
         return this.produtoRepository.buscarTodos();
     }
 
-
     public void salvar(Produto produto) {
         this.produtoRepository.salvar(produto);
     }
-
 
     public void atualizar(int id, Produto produto) {
         Produto produtoInDB = this.produtoRepository.buscarPorId(id);

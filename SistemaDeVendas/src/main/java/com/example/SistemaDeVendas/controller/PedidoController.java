@@ -2,6 +2,7 @@ package com.example.SistemaDeVendas.controller;
 
 import com.example.SistemaDeVendas.entities.Pedido;
 import com.example.SistemaDeVendas.entities.Produto;
+import com.example.SistemaDeVendas.facades.PedidoFacade;
 import com.example.SistemaDeVendas.facades.ProdutoFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class PedidoController {
     }
 
     @GetMapping("/buscarPorID/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable int id) {
+    public ResponseEntity<Pedido> buscarPorId(@PathVariable int id) {
         Pedido pedido = pedidoFacade.buscarPorId(id);
         return pedido != null ? ResponseEntity.ok(pedido) : ResponseEntity.notFound().build();
     }

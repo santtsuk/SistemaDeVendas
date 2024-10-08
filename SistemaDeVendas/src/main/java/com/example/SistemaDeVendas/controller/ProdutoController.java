@@ -19,7 +19,7 @@ public class ProdutoController {
         this.produtoFacade = produtoFacade;
     }
 
-    @GetMapping ("/buscarTodos")
+    @GetMapping("/buscarTodos")
     public ResponseEntity<List<Produto>> buscarTodos() {
         List<Produto> produtos = produtoFacade.buscarTodos();
         return ResponseEntity.ok(produtos);

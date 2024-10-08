@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class PedidoApplication implements IPedido {
 
@@ -34,7 +33,6 @@ public class PedidoApplication implements IPedido {
     public void salvar(Pedido pedido) {
         this.pedidoRepository.salvar(pedido);
     }
-
 
     public void atualizar(int id, Pedido pedido) {
         Pedido pedidoInDB = this.pedidoRepository.buscarPorId(id);
