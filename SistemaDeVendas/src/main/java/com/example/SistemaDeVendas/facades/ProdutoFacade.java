@@ -2,9 +2,10 @@ package com.example.SistemaDeVendas.facades;
 
 import com.example.SistemaDeVendas.applications.ProdutoApplication;
 import com.example.SistemaDeVendas.entities.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class ProdutoFacade {
 
     private ProdutoApplication produtoApplication;

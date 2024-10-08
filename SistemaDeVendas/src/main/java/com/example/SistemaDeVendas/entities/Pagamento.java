@@ -11,10 +11,12 @@ public class Pagamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "id_pedido")
+    @ManyToOne
+    @JoinColumn (name = "id_Pedido")
     private Pedido idPedido;
 
-    @Column(name = "id_pagamento")
+    @ManyToOne
+    @JoinColumn (name = "id_pagamento")
     private TipoPagamento idPagamento;
 
     @Column(name = "valor")

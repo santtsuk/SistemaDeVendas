@@ -11,10 +11,12 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "id_pedido")
+    @ManyToOne
+    @JoinColumn (name = "id_Pedido")
     private Pedido idPedido;
 
-    @Column(name = "id_produto")
+    @ManyToOne
+    @JoinColumn (name = "id_produto")
     private Produto idProduto;
 
     @Column(name = "quantidade")

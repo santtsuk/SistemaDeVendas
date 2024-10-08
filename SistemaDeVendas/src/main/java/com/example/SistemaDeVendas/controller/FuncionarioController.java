@@ -8,7 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
+@RequestMapping("/funcionario")
 public class FuncionarioController {
     private final FuncionarioFacade funcionarioFacade;
 
@@ -17,13 +18,13 @@ public class FuncionarioController {
         this.funcionarioFacade = funcionarioFacade;
     }
 
-    @GetMapping("/buscarFuncionario")
+    @GetMapping("/buscarTodos")
     public ResponseEntity<List<Funcionario>> buscarTodos() {
         List<Funcionario> funcionarios = funcionarioFacade.buscarTodos();
         return ResponseEntity.ok(funcionarios);
     }
 
-    @GetMapping("/buscarFuncionarios/{id}")
+    @GetMapping("/buscarPorID/{id}")
     public ResponseEntity<Funcionario> buscarPorId(@PathVariable int id) {
         Funcionario funcionario = funcionarioFacade.buscarPorId(id);
         return funcionario != null ? ResponseEntity.ok(funcionario) : ResponseEntity.notFound().build();

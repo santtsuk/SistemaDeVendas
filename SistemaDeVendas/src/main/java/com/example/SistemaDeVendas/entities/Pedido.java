@@ -14,22 +14,25 @@ public class Pedido {
     @Column(name = "data_pedido")
     private String dataPedido;
 
-    @Column(name = "id_cliente")
-    private int idCliente;
+    @ManyToOne
+    @JoinColumn (name = "id_cliente")
+    private Cliente idCliente;
 
     @Column(name = "valor_total")
     private float valorTotal;
 
-    @Column(name = "id_pagamento")
-    private int idPagamento;
+    @ManyToOne
+    @JoinColumn (name = "id_pagamento")
+    private TipoPagamento idPagamento;
 
-    @Column(name = "id_usuario")
-    private int idUsuario;
+    @ManyToOne
+    @JoinColumn (name = "id_usuario")
+    private Usuario idUsuario;
 
     public Pedido() {
     }
 
-    public Pedido(int id, String dataPedido, int idCliente, float valorTotal, int idPagamento, int idUsuario) {
+    public Pedido(int id, String dataPedido, Cliente idCliente, float valorTotal, TipoPagamento idPagamento, Usuario idUsuario) {
         this.id = id;
         this.dataPedido = dataPedido;
         this.idCliente = idCliente;
@@ -54,11 +57,11 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public int getIdCliente() {
+    public Cliente getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Cliente idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -70,19 +73,19 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public int getIdPagamento() {
+    public TipoPagamento getIdPagamento() {
         return idPagamento;
     }
 
-    public void setIdPagamento(int idPagamento) {
+    public void setIdPagamento(TipoPagamento idPagamento) {
         this.idPagamento = idPagamento;
     }
 
-    public int getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 }

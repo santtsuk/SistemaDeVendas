@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/tipoPagamento")
 public class TipoPagamentoController {
     private final TipoPagamentoFacade tipoPagamentoFacade;
 

@@ -6,10 +6,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Repository
 public class FuncionarioRepositoryMySql implements IFuncionario {
     @PersistenceContext
     private EntityManager entityManager;
@@ -26,7 +27,7 @@ public class FuncionarioRepositoryMySql implements IFuncionario {
 
     @Override
     public List<Funcionario> buscarTodos() {
-        return entityManager.createQuery("select f from Funcionario f ORDER BY f.nomeFuncionario", Funcionario.class).getResultList();
+        return entityManager.createQuery("select f from Funcionario f ORDER BY f.nome", Funcionario.class).getResultList();
     }
 
     @Transactional

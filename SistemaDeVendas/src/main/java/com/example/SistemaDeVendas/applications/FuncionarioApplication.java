@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FuncionarioApplication implements IFuncionario {
+public class FuncionarioApplication  {
 
-    private IFuncionario funcionarioRepository;
+    private final FuncionarioRepositoryMySql funcionarioRepository;
 
     @Autowired
     public FuncionarioApplication(FuncionarioRepositoryMySql funcionarioRepository) {

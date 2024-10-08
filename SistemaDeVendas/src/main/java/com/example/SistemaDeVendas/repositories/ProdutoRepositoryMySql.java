@@ -34,7 +34,7 @@ public class ProdutoRepositoryMySql implements IProduto {
 
     @Override
     public List<Produto> buscarTodos() {
-        return entityManager.createQuery("select c from Produto c ORDER BY c.nomeProduto", Produto.class).getResultList();
+        return entityManager.createQuery("select c from Produto c ORDER BY c.nome", Produto.class).getResultList();
     }
 
     @Transactional

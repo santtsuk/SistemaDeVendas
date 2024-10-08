@@ -5,9 +5,10 @@ import com.example.SistemaDeVendas.entities.Pagamento;
 import com.example.SistemaDeVendas.entities.Pedido;
 import com.example.SistemaDeVendas.entities.TipoPagamento;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class PagamentoFacade {
 
     private PagamentoApplication pagamentoApplication;

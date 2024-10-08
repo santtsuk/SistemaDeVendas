@@ -34,7 +34,7 @@ public class TipoPagamentoRepositoryMySql implements ITipoPagamento {
 
     @Override
     public List<TipoPagamento> buscarTodos() {
-        return entityManager.createQuery("select c from TipoPagamento c ORDER BY c.nomeTipoPagamento", TipoPagamento.class).getResultList();
+        return entityManager.createQuery("select c from TipoPagamento c ORDER BY c.descricao", TipoPagamento.class).getResultList();
     }
 
     @Transactional

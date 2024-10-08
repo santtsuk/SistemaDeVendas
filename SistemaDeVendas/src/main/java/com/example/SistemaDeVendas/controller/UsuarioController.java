@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/usuario")
 public class UsuarioController {
     private UsuarioFacade usuarioFacade;
 
@@ -18,14 +19,14 @@ public class UsuarioController {
         this.usuarioFacade = usuarioFacade;
     }
 
-    @GetMapping("/buscarUsuario")
+    @GetMapping("/buscarTodos")
     public ResponseEntity<List<Usuario>> buscarTodos() {
         List<Usuario> usuarios = usuarioFacade.buscarTodos();
 
         return ResponseEntity.ok(usuarios);
     }
 
-    @GetMapping("/buscarUsuario/{id}")
+    @GetMapping("/buscarPorID/{id}")
     public ResponseEntity<Usuario> buscarPorId(@PathVariable int id) {
         Usuario usuario = usuarioFacade.buscarPorId(id);
 

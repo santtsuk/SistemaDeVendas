@@ -22,7 +22,7 @@ public class ClienteController {
         this.clienteFacade = clienteFacade;
     }
 
-    @GetMapping("//buscarTodos")
+    @GetMapping("/buscarTodos")
     public ResponseEntity<List<Cliente>> buscarTodos() {
         List<Cliente> clientes = clienteFacade.buscarTodos();
 
