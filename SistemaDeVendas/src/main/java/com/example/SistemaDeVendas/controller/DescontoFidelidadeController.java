@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/descontofidelidade")
+@RequestMapping("/descontoFidelidade")
 public class DescontoFidelidadeController {
 
     private DescontoFidelidadeFacade descontoFidelidadeFacade;
