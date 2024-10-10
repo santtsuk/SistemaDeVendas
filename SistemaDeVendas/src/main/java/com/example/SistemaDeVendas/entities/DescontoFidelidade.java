@@ -2,6 +2,8 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "desconto_fidelidade")
 public class DescontoFidelidade {
@@ -16,10 +18,9 @@ public class DescontoFidelidade {
     @Column(name = "valor_Desconto")
     private float valorDesconto;
     @Column(name = "data_Aplicacao")
-    private String dataAplicacao;
+    private LocalDate dataAplicacao;
 
-    public DescontoFidelidade(int id, Cliente cliente, float valorDesconto, String dataAplicacao) {
-        this.id = id;
+    public DescontoFidelidade(Cliente cliente, float valorDesconto, LocalDate dataAplicacao) {
         this.cliente = cliente;
         this.valorDesconto = valorDesconto;
         this.dataAplicacao = dataAplicacao;
@@ -52,11 +53,11 @@ public class DescontoFidelidade {
         this.valorDesconto = valorDesconto;
     }
 
-    public String getDataAplicacao() {
+    public LocalDate getDataAplicacao() {
         return dataAplicacao;
     }
 
-    public void setDataAplicacao(String dataAplicacao) {
+    public void setDataAplicacao(LocalDate dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
     }
 }

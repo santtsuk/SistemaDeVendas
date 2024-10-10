@@ -2,6 +2,7 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Cliente {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf" ,unique = true)
     private String cpf;
 
     @Column(name = "telefone")
@@ -29,17 +30,23 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<DescontoFidelidade> descontos;
 
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    private List<Pedido> pedidos;
 
-    public Cliente(int id, String nome, String cpf, String telefone, String email, String endereco) {
-        this.id = id;
+
+    public Cliente(String nome, String cpf, String telefone, String email, String endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
+        this.descontos = new ArrayList<>();
+        this.pedidos = new ArrayList<>();
     }
 
     public Cliente() {
+        this.descontos = new ArrayList<>();
+        this.pedidos = new ArrayList<>();
     }
 
     public int getId() {
@@ -88,5 +95,21 @@ public class Cliente {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public List<DescontoFidelidade> getDescontos() {
+        return descontos;
+    }
+
+    public void setDescontos(List<DescontoFidelidade> descontos) {
+        this.descontos = descontos;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

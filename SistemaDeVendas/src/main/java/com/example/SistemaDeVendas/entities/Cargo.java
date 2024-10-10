@@ -2,6 +2,9 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "cargo")
 public class Cargo {
@@ -17,14 +20,18 @@ public class Cargo {
     @Column(name = "salario")
     private float salario;
 
+    @OneToMany(mappedBy = "cargo",cascade = CascadeType.ALL)
+    private List<Funcionario> funcionarios;
 
-    public Cargo(int id, String nomeCargo, float salario) {
-        this.id = id;
+
+    public Cargo(String nomeCargo, float salario) {
         this.nomeCargo = nomeCargo;
         this.salario = salario;
+        this.funcionarios = new ArrayList<>();
     }
 
     public Cargo() {
+        this.funcionarios = new ArrayList<>();
     }
 
     public int getId() {
@@ -49,5 +56,18 @@ public class Cargo {
 
     public void setSalario(float salario) {
         this.salario = salario;
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
+    public void addFuncionario(Funcionario funcionario){
+        funcionarios.add(funcionario);
+        funcionario.setCargo(this);
     }
 }
