@@ -15,8 +15,10 @@ public class DescontoFidelidade {
     @ManyToOne
     @JoinColumn (name = "id_Cliente")
     private Cliente cliente;
+
     @Column(name = "valor_Desconto")
     private float valorDesconto;
+
     @Column(name = "data_Aplicacao")
     private LocalDate dataAplicacao;
 

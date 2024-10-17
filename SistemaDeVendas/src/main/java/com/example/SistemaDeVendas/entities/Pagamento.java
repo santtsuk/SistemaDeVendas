@@ -24,18 +24,13 @@ public class Pagamento {
     @Column(name = "valor")
     private float valor;
 
-<<<<<<< Updated upstream
+
     @Column(name = "data_Pagamento")
     private LocalDate dataPagamento;
 
-    public Pagamento(Pedido idPedido, TipoPagamento idPagamento, float valor,LocalDate dataPagamento) {
-=======
-    @Column(name = "data_pagamento")
-    private LocalDate dataPagamento;
 
-    public Pagamento(int id, Pedido idPedido, TipoPagamento idPagamento, float valor,LocalDate dataPagamento) {
+    public Pagamento(Pedido idPedido, TipoPagamento idPagamento, float valor,LocalDate dataPagamento) {
         this.id = id;
->>>>>>> Stashed changes
         this.idPedido = idPedido;
         this.idPagamento = idPagamento;
         this.valor = valor;

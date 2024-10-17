@@ -19,19 +19,16 @@ public class Cargo {
 
     @Column(name = "salario")
     private float salario;
-
-    @OneToMany(mappedBy = "cargo",cascade = CascadeType.ALL)
-    private List<Funcionario> funcionarios;
-
+    
 
     public Cargo(String nomeCargo, float salario) {
         this.nomeCargo = nomeCargo;
         this.salario = salario;
-        this.funcionarios = new ArrayList<>();
+
     }
 
     public Cargo() {
-        this.funcionarios = new ArrayList<>();
+
     }
 
     public int getId() {
@@ -58,16 +55,4 @@ public class Cargo {
         this.salario = salario;
     }
 
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
-    }
-
-    public void setFuncionarios(List<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
-    }
-
-    public void addFuncionario(Funcionario funcionario){
-        funcionarios.add(funcionario);
-        funcionario.setCargo(this);
-    }
 }

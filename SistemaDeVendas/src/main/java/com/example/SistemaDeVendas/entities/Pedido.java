@@ -26,28 +26,20 @@ public class Pedido {
     private float valorTotal;
 
     @ManyToOne
-    @JoinColumn (name = "id_pagamento")
-    private Pagamento idPagamento;
-
-    @ManyToOne
     @JoinColumn (name = "id_usuario")
     private Usuario idUsuario;
 
-    @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
-    private List<ItemPedido> itemPedidos;
 
     public Pedido() {
-        this.itemPedidos = new ArrayList<>();
+
     }
 
-    public Pedido(LocalDate dataPedido, Cliente idCliente, float valorTotal, Pagamento idPagamento, Usuario idUsuario) {
+    public Pedido(LocalDate dataPedido, Cliente idCliente, float valorTotal, Usuario idUsuario) {
 
         this.dataPedido = dataPedido;
         this.cliente = idCliente;
         this.valorTotal = valorTotal;
-        this.idPagamento = idPagamento;
         this.idUsuario = idUsuario;
-        this.itemPedidos = new ArrayList<>();
     }
 
     public int getId() {
@@ -82,14 +74,6 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public Pagamento getIdPagamento() {
-        return idPagamento;
-    }
-
-    public void setIdPagamento(Pagamento idPagamento) {
-        this.idPagamento = idPagamento;
-    }
-
     public Usuario getIdUsuario() {
         return idUsuario;
     }
@@ -98,11 +82,5 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
-    public List<ItemPedido> getItemPedidos() {
-        return itemPedidos;
-    }
 
-    public void setItemPedidos(List<ItemPedido> itemPedidos) {
-        this.itemPedidos = itemPedidos;
-    }
 }
