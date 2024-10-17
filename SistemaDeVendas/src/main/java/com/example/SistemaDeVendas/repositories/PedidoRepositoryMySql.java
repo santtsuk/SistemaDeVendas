@@ -46,7 +46,6 @@ public class PedidoRepositoryMySql implements IPedido {
             pedidoInDB.setDataPedido(pedido.getDataPedido());
             pedidoInDB.setIdCliente(pedido.getIdCliente());
             pedidoInDB.setValorTotal(pedido.getValorTotal());
-            pedidoInDB.setIdPagamento(pedido.getIdPagamento());
             pedidoInDB.setIdUsuario(pedido.getIdUsuario());
 
             this.entityManager.merge(pedidoInDB);

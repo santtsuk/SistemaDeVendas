@@ -2,6 +2,8 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "pagamento")
 public class Pagamento {
@@ -22,7 +24,12 @@ public class Pagamento {
     @Column(name = "valor")
     private float valor;
 
-    public Pagamento(int id, Pedido idPedido, TipoPagamento idPagamento, float valor) {
+
+    @Column(name = "data_Pagamento")
+    private LocalDate dataPagamento;
+
+
+    public Pagamento(Pedido idPedido, TipoPagamento idPagamento, float valor,LocalDate dataPagamento) {
         this.id = id;
         this.idPedido = idPedido;
         this.idPagamento = idPagamento;
@@ -60,5 +67,13 @@ public class Pagamento {
 
     public void setValor(float valor) {
         this.valor = valor;
+    }
+
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 }

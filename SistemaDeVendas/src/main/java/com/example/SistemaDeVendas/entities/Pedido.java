@@ -2,6 +2,10 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -12,32 +16,29 @@ public class Pedido {
     private int id;
 
     @Column(name = "data_pedido")
-    private String dataPedido;
+    private LocalDate dataPedido;
 
     @ManyToOne
     @JoinColumn (name = "id_cliente")
-    private Cliente idCliente;
+    private Cliente cliente;
 
     @Column(name = "valor_total")
     private float valorTotal;
 
     @ManyToOne
-    @JoinColumn (name = "id_pagamento")
-    private TipoPagamento idPagamento;
-
-    @ManyToOne
     @JoinColumn (name = "id_usuario")
     private Usuario idUsuario;
 
+
     public Pedido() {
+
     }
 
-    public Pedido(int id, String dataPedido, Cliente idCliente, float valorTotal, TipoPagamento idPagamento, Usuario idUsuario) {
-        this.id = id;
+    public Pedido(LocalDate dataPedido, Cliente idCliente, float valorTotal, Usuario idUsuario) {
+
         this.dataPedido = dataPedido;
-        this.idCliente = idCliente;
+        this.cliente = idCliente;
         this.valorTotal = valorTotal;
-        this.idPagamento = idPagamento;
         this.idUsuario = idUsuario;
     }
 
@@ -49,20 +50,20 @@ public class Pedido {
         this.id = id;
     }
 
-    public String getDataPedido() {
+    public LocalDate getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(String dataPedido) {
+    public void setDataPedido(LocalDate dataPedido) {
         this.dataPedido = dataPedido;
     }
 
     public Cliente getIdCliente() {
-        return idCliente;
+        return cliente;
     }
 
     public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
+        this.cliente = idCliente;
     }
 
     public float getValorTotal() {
@@ -73,14 +74,6 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public TipoPagamento getIdPagamento() {
-        return idPagamento;
-    }
-
-    public void setIdPagamento(TipoPagamento idPagamento) {
-        this.idPagamento = idPagamento;
-    }
-
     public Usuario getIdUsuario() {
         return idUsuario;
     }
@@ -88,4 +81,6 @@ public class Pedido {
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+
 }

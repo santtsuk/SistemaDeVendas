@@ -29,14 +29,16 @@ public class Produto {
     @Column(name = "min_estoque")
     private int minEstoque;
 
-    public Produto(int id, String codigoBarras, String nome, String descricao, float preco, int estoque, int minEstoque) {
-        this.id = id;
+    public Produto( String codigoBarras, String nome, String descricao, float preco, int estoque, int minEstoque) {
         this.codigoBarras = codigoBarras;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.estoque = estoque;
         this.minEstoque = minEstoque;
+    }
+
+    public Produto() {
     }
 
     public int getId() {

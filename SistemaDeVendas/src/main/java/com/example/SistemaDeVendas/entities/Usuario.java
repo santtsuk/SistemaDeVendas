@@ -14,20 +14,20 @@ public class Usuario {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf",unique = true)
     private String cpf;
 
     @Column(name = "senha")
     private String senha;
 
-    @Column(name = "cargo")
-    private String cargo;
+    @ManyToOne
+    @JoinColumn (name = "id_cargo")
+    private Cargo cargo;
 
     @Column(name = "setor")
     private String setor;
 
-    public Usuario(int id, String nome, String cpf, String senha, String cargo, String setor) {
-        this.id = id;
+    public Usuario(String nome, String cpf, String senha, Cargo cargo, String setor) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
@@ -70,11 +70,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 

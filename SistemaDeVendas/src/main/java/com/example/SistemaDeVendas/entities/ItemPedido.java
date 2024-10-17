@@ -3,7 +3,7 @@ package com.example.SistemaDeVendas.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "itemPedido")
+@Table(name = "item_Pedido")
 public class ItemPedido {
 
     @Id
@@ -13,11 +13,11 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn (name = "id_Pedido")
-    private Pedido idPedido;
+    private Pedido pedido;
 
     @ManyToOne
     @JoinColumn (name = "id_produto")
-    private Produto idProduto;
+    private Produto produto;
 
     @Column(name = "quantidade")
     private int quantidade;
@@ -25,10 +25,9 @@ public class ItemPedido {
     @Column(name = "preco_unitario")
     private float precoUnitario;
 
-    public ItemPedido(int id, Pedido idPedido, Produto idProduto, int quantidade, float precoUnitario) {
-        this.id = id;
-        this.idPedido = idPedido;
-        this.idProduto = idProduto;
+    public ItemPedido(Pedido idPedido, Produto idProduto, int quantidade, float precoUnitario) {
+        this.pedido = idPedido;
+        this.produto = idProduto;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
     }
@@ -45,19 +44,19 @@ public class ItemPedido {
     }
 
     public Pedido getIdPedido() {
-        return idPedido;
+        return pedido;
     }
 
     public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
+        this.pedido = idPedido;
     }
 
     public Produto getIdProduto() {
-        return idProduto;
+        return produto;
     }
 
     public void setIdProduto(Produto idProduto) {
-        this.idProduto = idProduto;
+        this.produto = idProduto;
     }
 
     public int getQuantidade() {

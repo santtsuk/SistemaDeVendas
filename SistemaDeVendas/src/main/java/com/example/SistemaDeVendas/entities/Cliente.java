@@ -2,6 +2,7 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Cliente {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf" ,unique = true)
     private String cpf;
 
     @Column(name = "telefone")
@@ -26,20 +27,20 @@ public class Cliente {
 
     @Column(name = "endereco")
     private String endereco;
-    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
-    private List<DescontoFidelidade> descontos;
 
 
-    public Cliente(int id, String nome, String cpf, String telefone, String email, String endereco) {
-        this.id = id;
+
+    public Cliente(String nome, String cpf, String telefone, String email, String endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
+
     }
 
     public Cliente() {
+
     }
 
     public int getId() {
@@ -89,4 +90,5 @@ public class Cliente {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+
 }

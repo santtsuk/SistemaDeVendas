@@ -3,7 +3,7 @@ package com.example.SistemaDeVendas.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tipoPagamento")
+@Table(name = "tipo_Pagamento")
 public class TipoPagamento {
     @Id
     @Column(name = "id")
@@ -13,8 +13,7 @@ public class TipoPagamento {
     @Column(name = "descricao")
     private String descricao;
 
-    public TipoPagamento(int id, String descricao) {
-        this.id = id;
+    public TipoPagamento(String descricao) {
         this.descricao = descricao;
     }
 

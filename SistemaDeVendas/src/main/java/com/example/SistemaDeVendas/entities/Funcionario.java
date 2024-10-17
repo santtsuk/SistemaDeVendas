@@ -2,6 +2,8 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
@@ -14,25 +16,28 @@ public class Funcionario {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf",unique = true)
     private String cpf;
 
-    @Column(name = "cargo")
-    private String cargo;
+    @ManyToOne
+    @JoinColumn (name = "id_cargo")
+    private Cargo cargo;
 
     @Column(name = "setor")
     private String setor;
 
     @Column(name = "data_adimissao")
-    private String dataAdimissao;
+    private LocalDate dataAdimissao;
 
-    public Funcionario(int id, String nome, String cpf, String cargo, String setor, String dataAdimissao) {
-        this.id = id;
+    public Funcionario(String nome, String cpf, Cargo cargo, String setor, LocalDate dataAdimissao) {
         this.nome = nome;
         this.cpf = cpf;
         this.cargo = cargo;
         this.setor = setor;
         this.dataAdimissao = dataAdimissao;
+    }
+
+    public Funcionario() {
     }
 
     public int getId() {
@@ -59,11 +64,11 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 
@@ -75,11 +80,11 @@ public class Funcionario {
         this.setor = setor;
     }
 
-    public String getDataAdimissao() {
+    public LocalDate getDataAdimissao() {
         return dataAdimissao;
     }
 
-    public void setDataAdimissao(String dataAdimissao) {
+    public void setDataAdimissao(LocalDate dataAdimissao) {
         this.dataAdimissao = dataAdimissao;
     }
 }

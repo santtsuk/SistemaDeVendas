@@ -2,6 +2,9 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "cargo")
 public class Cargo {
@@ -16,15 +19,16 @@ public class Cargo {
 
     @Column(name = "salario")
     private float salario;
+    
 
-
-    public Cargo(int id, String nomeCargo, float salario) {
-        this.id = id;
+    public Cargo(String nomeCargo, float salario) {
         this.nomeCargo = nomeCargo;
         this.salario = salario;
+
     }
 
     public Cargo() {
+
     }
 
     public int getId() {
@@ -50,4 +54,5 @@ public class Cargo {
     public void setSalario(float salario) {
         this.salario = salario;
     }
+
 }
