@@ -12,7 +12,7 @@ public class ItemPedido {
     private int id;
 
     @ManyToOne
-    @JoinColumn (name = "id_Pedido")
+    @JoinColumn (name = "id_pedido")
     private Pedido pedido;
 
     @ManyToOne

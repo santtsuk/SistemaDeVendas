@@ -27,7 +27,7 @@ public class ItemPedidoRepositoryMySql implements IItemPedido {
 
     @Override
     public List<ItemPedido> buscarTodos() {
-        return entityManager.createQuery("select p from ItemPedido p ORDER BY p.idPedido", ItemPedido.class).getResultList();
+        return entityManager.createQuery("select p from ItemPedido p ORDER BY p.pedido", ItemPedido.class).getResultList();
     }
 
     @Transactional
