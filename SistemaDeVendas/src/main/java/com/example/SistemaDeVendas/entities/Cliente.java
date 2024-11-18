@@ -28,7 +28,11 @@ public class Cliente {
     @Column(name = "endereco")
     private String endereco;
 
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    private List<Pedido> pedidos  = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    private List<DescontoFidelidade> descontoFidelidades  = new ArrayList<>();
 
     public Cliente(String nome, String cpf, String telefone, String email, String endereco) {
         this.nome = nome;
@@ -91,4 +95,19 @@ public class Cliente {
         this.endereco = endereco;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public List<DescontoFidelidade> getDescontoFidelidades() {
+        return descontoFidelidades;
+    }
+
+    public void setDescontoFidelidades(List<DescontoFidelidade> descontoFidelidades) {
+        this.descontoFidelidades = descontoFidelidades;
+    }
 }

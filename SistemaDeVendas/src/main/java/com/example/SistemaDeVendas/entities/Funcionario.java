@@ -1,7 +1,6 @@
 package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -19,22 +18,25 @@ public class Funcionario {
     @Column(name = "cpf",unique = true)
     private String cpf;
 
-    @ManyToOne
+    @ManyToOne(cascade = cascadeType.ALL)
     @JoinColumn (name = "id_cargo")
     private Cargo cargo;
 
     @Column(name = "setor")
     private String setor;
 
-    @Column(name = "data_adimissao")
-    private LocalDate dataAdimissao;
+    @Column(name = "data_admissao")
+    private LocalDate dataAdmissao;
 
-    public Funcionario(String nome, String cpf, Cargo cargo, String setor, LocalDate dataAdimissao) {
+    @OneToOne(mappedBy = "funcionario")
+    private Usuario usuario;
+
+    public Funcionario(String nome, String cpf, Cargo cargo, String setor, LocalDate dataAdmissao) {
         this.nome = nome;
         this.cpf = cpf;
         this.cargo = cargo;
         this.setor = setor;
-        this.dataAdimissao = dataAdimissao;
+        this.dataAdmissao = dataAdmissao;
     }
 
     public Funcionario() {
@@ -48,11 +50,11 @@ public class Funcionario {
         this.id = id;
     }
 
-    public String getNomeFuncionario() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNomeFuncionario(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -81,10 +83,18 @@ public class Funcionario {
     }
 
     public LocalDate getDataAdimissao() {
-        return dataAdimissao;
+        return dataAdmissao;
     }
 
     public void setDataAdimissao(LocalDate dataAdimissao) {
-        this.dataAdimissao = dataAdimissao;
+        this.dataAdmissao = dataAdimissao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -22,6 +22,9 @@ public class DescontoFidelidade {
     @Column(name = "data_Aplicacao")
     private LocalDate dataAplicacao;
 
+    @OneToOne(mappedBy = "descontoFidelidade",cascade = CascadeType.ALL)
+    private Pagamento pagamento;
+
     public DescontoFidelidade(Cliente cliente, float valorDesconto, LocalDate dataAplicacao) {
         this.cliente = cliente;
         this.valorDesconto = valorDesconto;
@@ -39,12 +42,12 @@ public class DescontoFidelidade {
         this.id = id;
     }
 
-    public Cliente getIdCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.cliente = idCliente;
+    public void setIdCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public float getValorDesconto() {
@@ -61,5 +64,13 @@ public class DescontoFidelidade {
 
     public void setDataAplicacao(LocalDate dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 }

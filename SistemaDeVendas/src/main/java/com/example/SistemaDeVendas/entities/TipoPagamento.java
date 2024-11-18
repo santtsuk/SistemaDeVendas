@@ -2,8 +2,11 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "tipo_Pagamento")
+@Table(name = "tipo_pagamento")
 public class TipoPagamento {
     @Id
     @Column(name = "id")
@@ -12,6 +15,9 @@ public class TipoPagamento {
 
     @Column(name = "descricao")
     private String descricao;
+
+    @OneToMany(mappedBy = "tipoPagamento",cascade = CascadeType.ALL)
+    private List<Pagamento> pagamentos  = new ArrayList<>();
 
     public TipoPagamento(String descricao) {
         this.descricao = descricao;
@@ -34,5 +40,13 @@ public class TipoPagamento {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
+
+    public void setPagamentos(List<Pagamento> pagamentos) {
+        this.pagamentos = pagamentos;
     }
 }

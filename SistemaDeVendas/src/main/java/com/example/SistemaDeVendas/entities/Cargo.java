@@ -19,7 +19,9 @@ public class Cargo {
 
     @Column(name = "salario")
     private float salario;
-    
+
+    @OneToMany(mappedBy = "cargo",cascade = CascadeType.ALL)
+    private List<Funcionario> funcionarios  = new ArrayList<>();
 
     public Cargo(String nomeCargo, float salario) {
         this.nomeCargo = nomeCargo;
@@ -55,4 +57,11 @@ public class Cargo {
         this.salario = salario;
     }
 
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
 }

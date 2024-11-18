@@ -14,51 +14,68 @@ public class Pagamento {
     private int id;
 
     @ManyToOne
-    @JoinColumn (name = "id_Pedido")
-    private Pedido idPedido;
+    @JoinColumn(name = "id_pedido")
+    private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn (name = "id_pagamento")
-    private TipoPagamento idPagamento;
+    @JoinColumn(name = "id_tipo_pagamento")
+    private TipoPagamento tipoPagamento;
 
     @Column(name = "valor")
     private float valor;
-
 
     @Column(name = "data_Pagamento")
     private LocalDate dataPagamento;
 
 
-    public Pagamento(Pedido idPedido, TipoPagamento idPagamento, float valor,LocalDate dataPagamento) {
-        this.id = id;
-        this.idPedido = idPedido;
-        this.idPagamento = idPagamento;
+    @OneToOne
+    @JoinColumn(name = "desconto_fidelidade")
+    private DescontoFidelidade descontoFidelidade;
+
+
+    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
+        this.pedido = pedido;
+        this.tipoPagamento = tipoPagamento;
         this.valor = valor;
+        this.dataPagamento = dataPagamento;
+        this.descontoFidelidade = descontoFidelidade;
+    }
+
+
+    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float valor, LocalDate dataPagamento) {
+        this.pedido = pedido;
+        this.tipoPagamento = tipoPagamento;
+        this.valor = valor;
+        this.dataPagamento = dataPagamento;
     }
 
     public Pagamento() {
     }
 
-    public int getId() {return id;}
+
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;
     }
 
+
     public Pedido getIdPedido() {
-        return idPedido;
+        return pedido;
     }
 
-    public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
+    public void setIdPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public TipoPagamento getIdPagamento() {
-        return idPagamento;
+        return tipoPagamento;
     }
 
-    public void setIdPagamento(TipoPagamento idPagamento) {
-        this.idPagamento = idPagamento;
+    public void setIdPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
 
     public float getValor() {
@@ -75,5 +92,13 @@ public class Pagamento {
 
     public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
+    }
+
+    public DescontoFidelidade getDescontoFidelidade() {
+        return descontoFidelidade;
+    }
+
+    public void setDescontoFidelidade(DescontoFidelidade descontoFidelidade) {
+        this.descontoFidelidade = descontoFidelidade;
     }
 }

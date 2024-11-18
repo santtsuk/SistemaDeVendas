@@ -27,19 +27,24 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn (name = "id_usuario")
-    private Usuario idUsuario;
+    private Usuario usuario;
 
+    @OneToMany(mappedBy= "pedido",cascade = CascadeType.ALL)
+    private List<Pagamento> pagamentos  = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
+    private List<ItemPedido> itemPedidos  = new ArrayList<>();
 
     public Pedido() {
 
     }
 
-    public Pedido(LocalDate dataPedido, Cliente idCliente, float valorTotal, Usuario idUsuario) {
+    public Pedido(LocalDate dataPedido, Cliente cliente, float valorTotal, Usuario usuario) {
 
         this.dataPedido = dataPedido;
-        this.cliente = idCliente;
+        this.cliente = cliente;
         this.valorTotal = valorTotal;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -58,12 +63,12 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public Cliente getIdCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
-        this.cliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public float getValorTotal() {
@@ -74,13 +79,27 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
+    public List<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
 
+    public void setPagamentos(List<Pagamento> pagamentos) {
+        this.pagamentos = pagamentos;
+    }
+
+    public List<ItemPedido> getItemPedidos() {
+        return itemPedidos;
+    }
+
+    public void setItemPedidos(List<ItemPedido> itemPedidos) {
+        this.itemPedidos = itemPedidos;
+    }
 }

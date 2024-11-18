@@ -2,6 +2,9 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -11,28 +14,24 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "nome")
-    private String nome;
-
     @Column(name = "cpf",unique = true)
     private String cpf;
 
     @Column(name = "senha")
     private String senha;
 
-    @ManyToOne
-    @JoinColumn (name = "id_cargo")
-    private Cargo cargo;
+    @OneToOne
+    @JoinColumn(name = "id_funcionario", nullable = true)
+    private Funcionario funcionario;
 
-    @Column(name = "setor")
-    private String setor;
+    @OneToMany(mappedBy = "usuario")
+    private List<Pedido> pedidos  = new ArrayList<>();
 
-    public Usuario(String nome, String cpf, String senha, Cargo cargo, String setor) {
-        this.nome = nome;
+    public Usuario(String cpf, String senha,Funcionario funcionario ) {
         this.cpf = cpf;
         this.senha = senha;
-        this.cargo = cargo;
-        this.setor = setor;
+        this.funcionario = funcionario;
+
     }
 
     public Usuario() {
@@ -54,14 +53,6 @@ public class Usuario {
         this.cpf = cpf;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -70,19 +61,19 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Cargo getCargo() {
-        return cargo;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public String getSetor() {
-        return setor;
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

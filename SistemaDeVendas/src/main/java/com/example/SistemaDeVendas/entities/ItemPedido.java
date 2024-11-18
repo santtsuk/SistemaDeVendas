@@ -25,9 +25,9 @@ public class ItemPedido {
     @Column(name = "preco_unitario")
     private float precoUnitario;
 
-    public ItemPedido(Pedido idPedido, Produto idProduto, int quantidade, float precoUnitario) {
-        this.pedido = idPedido;
-        this.produto = idProduto;
+    public ItemPedido(Pedido pedido, Produto produto, int quantidade, float precoUnitario) {
+        this.pedido = pedido;
+        this.produto = produto;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
     }
@@ -47,16 +47,16 @@ public class ItemPedido {
         return pedido;
     }
 
-    public void setIdPedido(Pedido idPedido) {
-        this.pedido = idPedido;
+    public void setIdPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public Produto getIdProduto() {
         return produto;
     }
 
-    public void setIdProduto(Produto idProduto) {
-        this.produto = idProduto;
+    public void setIdProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public int getQuantidade() {
