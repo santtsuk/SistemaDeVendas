@@ -42,7 +42,7 @@ public class DescontoFidelidade {
         this.id = id;
     }
 
-    public Cliente getCliente() {
+    public Cliente getIdCliente() {
         return cliente;
     }
 

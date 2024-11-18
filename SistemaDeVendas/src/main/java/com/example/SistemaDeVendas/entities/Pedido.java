@@ -63,11 +63,11 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    public Cliente getCliente() {
+    public Cliente getIdCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setIdCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -79,11 +79,11 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public Usuario getUsuario() {
+    public Usuario getIdUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setIdUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

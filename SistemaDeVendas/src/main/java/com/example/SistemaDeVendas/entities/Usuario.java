@@ -21,7 +21,7 @@ public class Usuario {
     private String senha;
 
     @OneToOne
-    @JoinColumn(name = "id_funcionario", nullable = true)
+    @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
     @OneToMany(mappedBy = "usuario")

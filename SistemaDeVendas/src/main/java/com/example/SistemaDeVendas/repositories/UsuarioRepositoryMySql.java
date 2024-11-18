@@ -43,10 +43,8 @@ public class UsuarioRepositoryMySql implements IUsuario {
         Usuario usuarioInDB = this.entityManager.find(Usuario.class, id);
 
         usuarioInDB.setCpf(usuario.getCpf());
-        usuarioInDB.setNome(usuario.getNome());
         usuarioInDB.setSenha(usuario.getSenha());
-        usuarioInDB.setCargo(usuario.getCargo());
-        usuarioInDB.setSetor(usuario.getSetor());
+        usuarioInDB.setFuncionario(usuarioInDB.getFuncionario());
 
         this.entityManager.merge(usuarioInDB);
     }

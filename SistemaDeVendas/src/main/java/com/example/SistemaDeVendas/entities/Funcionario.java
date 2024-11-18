@@ -18,7 +18,7 @@ public class Funcionario {
     @Column(name = "cpf",unique = true)
     private String cpf;
 
-    @ManyToOne(cascade = cascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "id_cargo")
     private Cargo cargo;
 

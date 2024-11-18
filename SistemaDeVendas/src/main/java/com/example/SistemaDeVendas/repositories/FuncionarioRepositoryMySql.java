@@ -41,7 +41,7 @@ public class FuncionarioRepositoryMySql implements IFuncionario {
     public void atualizar(int id, Funcionario funcionario) {
         Funcionario funcionarioInDB = this.entityManager.find(Funcionario.class, id);
 
-        funcionarioInDB.setNomeFuncionario(funcionario.getNomeFuncionario());
+        funcionarioInDB.setNome(funcionario.getNome());
         funcionarioInDB.setCpf(funcionario.getCpf());
         funcionarioInDB.setCargo(funcionario.getCargo());
         funcionarioInDB.setSetor(funcionario.getSetor());
