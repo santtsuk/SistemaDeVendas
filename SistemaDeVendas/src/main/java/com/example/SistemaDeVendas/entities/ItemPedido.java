@@ -43,9 +43,6 @@ public class ItemPedido {
         this.id = id;
     }
 
-    public Pedido getIdPedido() {
-        return pedido;
-    }
 
     public void setIdPedido(Pedido pedido) {
         this.pedido = pedido;

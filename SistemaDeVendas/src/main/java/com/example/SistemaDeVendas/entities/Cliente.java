@@ -95,16 +95,8 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
-    }
-
-    public List<DescontoFidelidade> getDescontoFidelidades() {
-        return descontoFidelidades;
     }
 
     public void setDescontoFidelidades(List<DescontoFidelidade> descontoFidelidades) {

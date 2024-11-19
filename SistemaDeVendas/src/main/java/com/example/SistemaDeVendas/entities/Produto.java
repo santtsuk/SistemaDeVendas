@@ -103,10 +103,6 @@ public class Produto {
         this.minEstoque = minEstoque;
     }
 
-    public List<ItemPedido> getItemPedidos() {
-        return itemPedidos;
-    }
-
     public void setItemPedidos(List<ItemPedido> itemPedidos) {
         this.itemPedidos = itemPedidos;
     }

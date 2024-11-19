@@ -42,10 +42,6 @@ public class TipoPagamento {
         this.descricao = descricao;
     }
 
-    public List<Pagamento> getPagamentos() {
-        return pagamentos;
-    }
-
     public void setPagamentos(List<Pagamento> pagamentos) {
         this.pagamentos = pagamentos;
     }

@@ -42,9 +42,6 @@ public class DescontoFidelidade {
         this.id = id;
     }
 
-    public Cliente getIdCliente() {
-        return cliente;
-    }
 
     public void setIdCliente(Cliente cliente) {
         this.cliente = cliente;
@@ -64,10 +61,6 @@ public class DescontoFidelidade {
 
     public void setDataAplicacao(LocalDate dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
-    }
-
-    public Pagamento getPagamento() {
-        return pagamento;
     }
 
     public void setPagamento(Pagamento pagamento) {

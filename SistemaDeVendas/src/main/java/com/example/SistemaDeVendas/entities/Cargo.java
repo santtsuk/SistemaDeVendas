@@ -57,9 +57,6 @@ public class Cargo {
         this.salario = salario;
     }
 
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
-    }
 
     public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;

@@ -47,7 +47,7 @@ public class DescontoFidelidadeRepositoryMySql implements IDescontoFidelidade {
             throw new EntityNotFoundException("DescontoFidelidade não encontrado com id: " + id);
         }
 
-        descontoFidelidadeInDB.setIdCliente(descontoFidelidade.getIdCliente());
+
         descontoFidelidadeInDB.setValorDesconto(descontoFidelidade.getValorDesconto());
         descontoFidelidadeInDB.setDataAplicacao(descontoFidelidade.getDataAplicacao());
 

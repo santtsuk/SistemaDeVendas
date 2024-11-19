@@ -42,7 +42,6 @@ public class PagamentoRepositoryMySql implements IPagamento {
     public void atualizar(int id, Pagamento pagamento) {
         Pagamento pagamentoInDB = this.entityManager.find(Pagamento.class, id);
 
-        pagamentoInDB.setIdPedido(pagamento.getIdPedido());
         pagamentoInDB.setIdPagamento(pagamento.getIdPagamento());
         pagamentoInDB.setValor(pagamento.getValor());
         this.entityManager.merge(pagamentoInDB);

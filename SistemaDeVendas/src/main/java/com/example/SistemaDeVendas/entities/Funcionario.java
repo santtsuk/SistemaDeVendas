@@ -90,10 +90,6 @@ public class Funcionario {
         this.dataAdmissao = dataAdimissao;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

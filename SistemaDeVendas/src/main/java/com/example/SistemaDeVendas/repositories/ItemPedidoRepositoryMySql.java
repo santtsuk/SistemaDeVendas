@@ -41,7 +41,6 @@ public class ItemPedidoRepositoryMySql implements IItemPedido {
     public void atualizar(int id, ItemPedido itemPedido) {
         ItemPedido itemPedidoInDB = this.entityManager.find(ItemPedido.class, id);
 
-        itemPedidoInDB.setIdPedido(itemPedido.getIdPedido());
         itemPedidoInDB.setIdProduto(itemPedido.getIdProduto());
         itemPedidoInDB.setQuantidade(itemPedido.getQuantidade());
         itemPedidoInDB.setPrecoUnitario(itemPedido.getPrecoUnitario());
