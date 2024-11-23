@@ -14,7 +14,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "cpf",unique = true)
+    @Column(name = "cpf", unique = true)
     private String cpf;
 
     @Column(name = "senha")
@@ -24,13 +24,20 @@ public class Usuario {
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Pedido> pedidos  = new ArrayList<>();
+    @Column(name = "enabled")
+    private boolean enabled;
 
-    public Usuario(String cpf, String senha,Funcionario funcionario ) {
+    @OneToMany(mappedBy = "usuario")
+    private List<Pedido> pedidos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Roles> roles = new ArrayList<>();
+
+    public Usuario(String cpf, String senha, Funcionario funcionario, boolean enabled) {
         this.cpf = cpf;
         this.senha = senha;
         this.funcionario = funcionario;
+        this.enabled = enabled;
 
     }
 
@@ -65,6 +72,10 @@ public class Usuario {
         return funcionario;
     }
 
+    public boolean isEnabled() { return enabled; }
+
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
+
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
@@ -72,4 +83,8 @@ public class Usuario {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+
+    public List<Roles> findRoles() { return roles; }
+
+    public void setRoles(List<Roles> roles) { this.roles = roles; }
 }

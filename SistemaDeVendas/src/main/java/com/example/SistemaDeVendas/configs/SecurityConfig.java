@@ -17,16 +17,52 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
-    @Configuration
-    public class SecurityConfig {
-        @Bean
-        public UserDetailsManager userDetailsManager(DataSource dataSource) {
-            JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+@Configuration
+public class SecurityConfig {
+    @Bean
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-            jdbcUserDetailsManager.setUsersByUsernameQuery("SELECT username, password, enabled FROM user where username = ?");
+        jdbcUserDetailsManager.setUsersByUsernameQuery("SELECT cpf, senha, enabled FROM usuario where cpf = ?");
 
-            jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select username, role from user inner join role on user.id = role.user_id where username = ?");
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select cpf, role from usuario inner join role on usuario.id = role.usuario_id where cpf = ?");
 
-            return jdbcUserDetailsManager;
-        }
+        return jdbcUserDetailsManager;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(configurer -> {
+            configurer
+                    
+//                         CONFIGURAÇÃO USADA COMO REFERENCIA
+
+//                        .requestMatchers(HttpMethod.GET, "/api/teachers/").hasRole("TEACHER")
+//                        .requestMatchers(HttpMethod.GET, "/api/teachers/**").hasRole("TEACHER")
+//                        .requestMatchers(HttpMethod.POST, "/api/teachers/").hasRole("COORDINATOR")
+//                        .requestMatchers(HttpMethod.PUT, "/api/teachers/**").hasRole("COORDINATOR")
+//                        .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
+//                        .requestMatchers("/api/users/**").permitAll();
+
+                    .requestMatchers(HttpMethod.GET, "cargo/buscartodos/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "cargo/buscarPorID/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "cargo/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "cargo/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "cargo/").hasRole("ADMIN")
+
+                    .requestMatchers(HttpMethod.GET, "cargo/buscartodos/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.GET, "cargo/buscarPorID/**").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.POST, "cargo/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.PUT, "cargo/").hasRole("GERENTE")
+                    .requestMatchers("/usuario/**").permitAll();
+
+
+        });
+
+        httpSecurity.httpBasic(Customizer.withDefaults());
+
+        httpSecurity.csrf(csrf -> csrf.disable());
+
+        return httpSecurity.build();
+    }
 }
