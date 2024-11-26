@@ -1,8 +1,12 @@
 package com.example.SistemaDeVendas.applications;
 
+import com.example.SistemaDeVendas.configs.RegraNegocioException;
+import com.example.SistemaDeVendas.entities.ItemPedido;
 import com.example.SistemaDeVendas.entities.Pedido;
+import com.example.SistemaDeVendas.entities.Produto;
 import com.example.SistemaDeVendas.interfacies.IPedido;
 import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
+import com.example.SistemaDeVendas.repositories.ProdutoRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +18,7 @@ public class PedidoApplication implements IPedido {
     private final PedidoRepositoryMySql pedidoRepository;
     private  ProdutoRepositoryMySql produtoRepository;
 
-    @Autowired
+
     @Autowired
 public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoRepositoryMySql produtoRepository) {
     this.pedidoRepository = pedidoRepository;
@@ -37,8 +41,10 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
         }
 
         for (ItemPedido item : pedido.getItemPedidos()) {
-            Produto produto = produtoRepository.buscarPorId(item.getProduto().getId())
-                .orElseThrow(() -> new RegraNegocioException("Produto não encontrado."));
+            Produto produto = produtoRepository.buscarPorId(item.getIdProduto().getId());
+            if (produto == null) {
+                throw new RegraNegocioException("Produto não encontrado.");
+            }
             if (produto.getEstoque() < item.getQuantidade()) {
                 throw new RegraNegocioException("Estoque insuficiente para o produto: " + produto.getNome());
             }

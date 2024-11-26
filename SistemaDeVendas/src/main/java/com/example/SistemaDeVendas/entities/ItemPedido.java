@@ -2,6 +2,8 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "item_Pedido")
 public class ItemPedido {
@@ -73,6 +75,7 @@ public class ItemPedido {
     }
 
     public BigDecimal calcularTotal(){
-        return BigDecimal.valueOf(this.quantidade).multiply(BigDecimal.valueOf(this.precoUnitario));
+        BigDecimal totalItem = BigDecimal.valueOf(this.quantidade).multiply(this.precoUnitario);
+        return totalItem;
     }
 }

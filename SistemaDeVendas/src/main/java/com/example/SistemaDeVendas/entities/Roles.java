@@ -1,12 +1,10 @@
 package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
-
+@Entity
+@Table(name = "roles")
 public class Roles {
 
-    @Entity
-    @Table(name = "role")
-    public class Role {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
@@ -19,10 +17,10 @@ public class Roles {
         @JoinColumn(name = "usuario_id", referencedColumnName = "id")
         private Usuario usuario;
 
-        public Role() {
+        public Roles() {
         }
 
-        public Role(String role) {
+        public Roles(String role) {
             this.role = role;
         }
 
@@ -50,4 +48,3 @@ public class Roles {
             this.usuario = usuario;
         }
     }
-}

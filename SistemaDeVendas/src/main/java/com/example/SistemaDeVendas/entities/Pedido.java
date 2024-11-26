@@ -2,17 +2,10 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-public enum StatusPedido {
-    PENDENTE,
-    PARCIALMENTE_PAGO,
-    PAGO,
-    CANCELADO
-}
-
 
 @Entity
 @Table(name = "pedido")
@@ -129,13 +122,13 @@ public class Pedido {
             .map(ItemPedido::calcularTotal)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
-    
+
 
     public void atualizarStatusPagamento() {
         BigDecimal totalPago = pagamentos.stream()
-            .map(Pagamento::getValor)
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
-    
+                .map(Pagamento::getValor)
+                .filter(valor -> valor != null)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
         if (totalPago.compareTo(valorTotal) < 0 && totalPago.compareTo(BigDecimal.ZERO) > 0) {
             this.status = StatusPedido.PARCIALMENTE_PAGO;
         } else if (totalPago.compareTo(valorTotal) == 0) {
@@ -144,6 +137,4 @@ public class Pedido {
             this.status = StatusPedido.PENDENTE;
         }
     }
-    
-    
 }

@@ -2,6 +2,7 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -22,7 +23,7 @@ public class Pagamento {
     private TipoPagamento tipoPagamento;
 
     @Column(name = "valor")
-    private float valor;
+    private BigDecimal valor;
 
     @Column(name = "data_Pagamento")
     private LocalDate dataPagamento;
@@ -33,7 +34,7 @@ public class Pagamento {
     private DescontoFidelidade descontoFidelidade;
 
 
-    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
+    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, BigDecimal valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
         this.pedido = pedido;
         this.tipoPagamento = tipoPagamento;
         this.valor = valor;
@@ -42,7 +43,7 @@ public class Pagamento {
     }
 
 
-    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float valor, LocalDate dataPagamento) {
+    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, BigDecimal valor, LocalDate dataPagamento) {
         this.pedido = pedido;
         this.tipoPagamento = tipoPagamento;
         this.valor = valor;
@@ -61,6 +62,10 @@ public class Pagamento {
         this.id = id;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
     public void setIdPedido(Pedido pedido) {
         this.pedido = pedido;
     }
@@ -73,11 +78,11 @@ public class Pagamento {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public float getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
