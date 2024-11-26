@@ -6,6 +6,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+public enum StatusPedido {
+    PENDENTE,
+    PARCIALMENTE_PAGO,
+    PAGO,
+    CANCELADO
+}
+
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -22,12 +30,16 @@ public class Pedido {
     @JoinColumn (name = "id_cliente")
     private Cliente cliente;
 
-    @Column(name = "valor_total")
-    private float valorTotal;
+    @Column(name = "valor_total", precision = 10, scale = 2)
+    private BigDecimal valorTotal;
 
     @ManyToOne
     @JoinColumn (name = "id_usuario")
     private Usuario usuario;
+
+    @Enumerated(EnumType.STRING)
+    @JoinColumn (name = "status")
+    private StatusPedido status;
 
     @OneToMany(mappedBy= "pedido",cascade = CascadeType.ALL)
     private List<Pagamento> pagamentos  = new ArrayList<>();
@@ -39,12 +51,13 @@ public class Pedido {
 
     }
 
-    public Pedido(LocalDate dataPedido, Cliente cliente, float valorTotal, Usuario usuario) {
+    public Pedido(LocalDate dataPedido, Cliente cliente, BigDecimal valorTotal, Usuario usuario) {
 
         this.dataPedido = dataPedido;
         this.cliente = cliente;
         this.valorTotal = valorTotal;
         this.usuario = usuario;
+        this.status = StatusPedido.PENDENTE;
     }
 
     public int getId() {
@@ -71,11 +84,11 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public float getValorTotal() {
+    public BigDecimal getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(float valorTotal) {
+    public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
 
@@ -85,6 +98,14 @@ public class Pedido {
 
     public void setIdUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public StatusPedido getStatus(){
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
     }
 
     public List<Pagamento> getPagamentos() {
@@ -102,4 +123,27 @@ public class Pedido {
     public void setItemPedidos(List<ItemPedido> itemPedidos) {
         this.itemPedidos = itemPedidos;
     }
+
+    public void calcularValorTotal() {
+        this.valorTotal = itemPedidos.stream()
+            .map(ItemPedido::calcularTotal)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+    
+
+    public void atualizarStatusPagamento() {
+        BigDecimal totalPago = pagamentos.stream()
+            .map(Pagamento::getValor)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    
+        if (totalPago.compareTo(valorTotal) < 0 && totalPago.compareTo(BigDecimal.ZERO) > 0) {
+            this.status = StatusPedido.PARCIALMENTE_PAGO;
+        } else if (totalPago.compareTo(valorTotal) == 0) {
+            this.status = StatusPedido.PAGO;
+        } else {
+            this.status = StatusPedido.PENDENTE;
+        }
+    }
+    
+    
 }

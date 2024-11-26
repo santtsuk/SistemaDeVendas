@@ -23,9 +23,9 @@ public class ItemPedido {
     private int quantidade;
 
     @Column(name = "preco_unitario")
-    private float precoUnitario;
+    private BigDecimal precoUnitario;
 
-    public ItemPedido(Pedido pedido, Produto produto, int quantidade, float precoUnitario) {
+    public ItemPedido(Pedido pedido, Produto produto, int quantidade, BigDecimal precoUnitario) {
         this.pedido = pedido;
         this.produto = produto;
         this.quantidade = quantidade;
@@ -64,11 +64,15 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public float getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(float precoUnitario) {
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
+    }
+
+    public BigDecimal calcularTotal(){
+        return BigDecimal.valueOf(this.quantidade).multiply(BigDecimal.valueOf(this.precoUnitario));
     }
 }

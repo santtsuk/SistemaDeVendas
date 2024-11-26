@@ -12,11 +12,15 @@ import java.util.List;
 public class PedidoApplication implements IPedido {
 
     private final PedidoRepositoryMySql pedidoRepository;
+    private  ProdutoRepositoryMySql produtoRepository;
 
     @Autowired
-    public PedidoApplication(PedidoRepositoryMySql pedidoRepository) {
-        this.pedidoRepository = pedidoRepository;
-    }
+    @Autowired
+public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoRepositoryMySql produtoRepository) {
+    this.pedidoRepository = pedidoRepository;
+    this.produtoRepository = produtoRepository;
+}
+
 
     public Pedido buscarPorId(int id) {
         return this.pedidoRepository.buscarPorId(id);
@@ -27,6 +31,21 @@ public class PedidoApplication implements IPedido {
     }
 
     public void salvar(Pedido pedido) {
+
+        if (pedido.getItemPedidos() == null || pedido.getItemPedidos().isEmpty()) {
+            throw new RegraNegocioException("O pedido deve ter pelo menos um item associado.");
+        }
+
+        for (ItemPedido item : pedido.getItemPedidos()) {
+            Produto produto = produtoRepository.buscarPorId(item.getProduto().getId())
+                .orElseThrow(() -> new RegraNegocioException("Produto não encontrado."));
+            if (produto.getEstoque() < item.getQuantidade()) {
+                throw new RegraNegocioException("Estoque insuficiente para o produto: " + produto.getNome());
+            }
+            produto.setEstoque(produto.getEstoque() - item.getQuantidade());
+            produtoRepository.atualizar(produto.getId(),produto);
+        }
+        pedido.calcularValorTotal();
         this.pedidoRepository.salvar(pedido);
     }
 
