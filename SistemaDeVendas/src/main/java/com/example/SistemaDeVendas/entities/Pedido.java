@@ -23,8 +23,8 @@ public class Pedido {
     @JoinColumn (name = "id_cliente")
     private Cliente cliente;
 
-    @Column(name = "valor_total", precision = 10, scale = 2)
-    private BigDecimal valorTotal;
+    @Column(name = "valor_total")
+    private float valorTotal;
 
     @ManyToOne
     @JoinColumn (name = "id_usuario")
@@ -44,7 +44,7 @@ public class Pedido {
 
     }
 
-    public Pedido(LocalDate dataPedido, Cliente cliente, BigDecimal valorTotal, Usuario usuario) {
+    public Pedido(LocalDate dataPedido, Cliente cliente, float valorTotal, Usuario usuario) {
 
         this.dataPedido = dataPedido;
         this.cliente = cliente;
@@ -77,11 +77,11 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public BigDecimal getValorTotal() {
+    public float getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(BigDecimal valorTotal) {
+    public void setValorTotal(float valorTotal) {
         this.valorTotal = valorTotal;
     }
 
@@ -119,22 +119,22 @@ public class Pedido {
 
     public void calcularValorTotal() {
         this.valorTotal = itemPedidos.stream()
-            .map(ItemPedido::calcularTotal)
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .map(ItemPedido::calcularTotal)
+                .reduce(0f, Float::sum);
     }
 
-
     public void atualizarStatusPagamento() {
-        BigDecimal totalPago = pagamentos.stream()
+        float totalPago = pagamentos.stream()
                 .map(Pagamento::getValor)
                 .filter(valor -> valor != null)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        if (totalPago.compareTo(valorTotal) < 0 && totalPago.compareTo(BigDecimal.ZERO) > 0) {
+                .reduce(0f, Float::sum);
+        if (totalPago > valorTotal && totalPago > 0) {
             this.status = StatusPedido.PARCIALMENTE_PAGO;
-        } else if (totalPago.compareTo(valorTotal) == 0) {
+        } else if (totalPago == valorTotal) {
             this.status = StatusPedido.PAGO;
         } else {
             this.status = StatusPedido.PENDENTE;
         }
     }
+
 }

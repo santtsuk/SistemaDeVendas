@@ -53,17 +53,17 @@ public class PagamentoApplication implements IPagamento {
                 throw new RegraNegocioException("Desconto expirado.");
             }
 
-            BigDecimal valorDesconto = BigDecimal.valueOf(desconto.getValorDesconto());
-            BigDecimal valorTotalAtual = pedido.getValorTotal();
+            float valorDesconto = desconto.getValorDesconto();
+            float valorTotalAtual = pedido.getValorTotal();
 
             
-            if (valorDesconto.compareTo(valorTotalAtual) > 0) {
+            if (valorDesconto > 0) {
                 throw new RegraNegocioException("O valor do desconto não pode ser maior que o total do pedido.");
             }
 
-            
-            BigDecimal novoValorTotal = valorTotalAtual.subtract(valorDesconto);
-            pedido.setValorTotal(BigDecimal.valueOf(novoValorTotal.floatValue()));
+
+            float  novoValorTotal = valorTotalAtual - valorDesconto;
+            pedido.setValorTotal(novoValorTotal);
             pedidoRepository.atualizar(pedido.getId(), pedido);
         }
         this.pagamentoRepository.salvar(pagamento);

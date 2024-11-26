@@ -39,7 +39,6 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
         if (pedido.getItemPedidos() == null || pedido.getItemPedidos().isEmpty()) {
             throw new RegraNegocioException("O pedido deve ter pelo menos um item associado.");
         }
-
         for (ItemPedido item : pedido.getItemPedidos()) {
             Produto produto = produtoRepository.buscarPorId(item.getIdProduto().getId());
             if (produto == null) {

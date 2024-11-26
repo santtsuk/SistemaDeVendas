@@ -23,7 +23,7 @@ public class Pagamento {
     private TipoPagamento tipoPagamento;
 
     @Column(name = "valor")
-    private BigDecimal valor;
+    private float  valor;
 
     @Column(name = "data_Pagamento")
     private LocalDate dataPagamento;
@@ -34,7 +34,7 @@ public class Pagamento {
     private DescontoFidelidade descontoFidelidade;
 
 
-    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, BigDecimal valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
+    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
         this.pedido = pedido;
         this.tipoPagamento = tipoPagamento;
         this.valor = valor;
@@ -43,7 +43,7 @@ public class Pagamento {
     }
 
 
-    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, BigDecimal valor, LocalDate dataPagamento) {
+    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento) {
         this.pedido = pedido;
         this.tipoPagamento = tipoPagamento;
         this.valor = valor;
@@ -78,11 +78,11 @@ public class Pagamento {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public BigDecimal getValor() {
+    public float  getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(float  valor) {
         this.valor = valor;
     }
 
