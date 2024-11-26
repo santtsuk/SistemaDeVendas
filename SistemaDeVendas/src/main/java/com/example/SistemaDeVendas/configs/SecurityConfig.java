@@ -104,7 +104,62 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.POST, "itemPedido/").hasRole("GERENTE")
                     .requestMatchers(HttpMethod.PUT, "itemPedido/").hasRole("GERENTE")
                 
+//-------------------------- CONFIRGURAÇÃO DE AUTENTIFICAÇÃO DA CLASSE descontoFidelidade
+                    .requestMatchers(HttpMethod.GET, "descontoFidelidade/buscartodos/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "descontoFidelidade/buscarPorID/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "descontoFidelidade/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "descontoFidelidade/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "descontoFidelidade/").hasRole("ADMIN")
+                    
+                    .requestMatchers(HttpMethod.GET, "descontoFidelidade/buscartodos/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.GET, "descontoFidelidade/buscarPorID/**").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.POST, "descontoFidelidade/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.PUT, "descontoFidelidade/").hasRole("GERENTE")
+                    .requestMatchers("/usuario/**").permitAll();
+                    
+                    
+//-------------------------- CONFIRGURAÇÃO DE AUTENTIFICAÇÃO DA CLASSE produto
+                    .requestMatchers(HttpMethod.GET, "produto/buscartodos/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "produto/buscarPorID/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "produto/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "produto/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "produto/").hasRole("ADMIN")
+                    
+                    .requestMatchers(HttpMethod.GET, "produto/buscartodos/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.GET, "produto/buscarPorID/**").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.POST, "produto/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.PUT, "produto/").hasRole("GERENTE")
+                    .requestMatchers("/usuario/**").permitAll();
+                    
+                    
+//-------------------------- CONFIRGURAÇÃO DE AUTENTIFICAÇÃO DA CLASSE pedido
+                    .requestMatchers(HttpMethod.GET, "pedido/buscartodos/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "pedido/buscarPorID/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "pedido/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "pedido/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "pedido/").hasRole("ADMIN")
+                    
+                    .requestMatchers(HttpMethod.GET, "pedido/buscartodos/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.GET, "pedido/buscarPorID/**").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.POST, "pedido/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.PUT, "pedido/").hasRole("GERENTE")
+                    .requestMatchers("/usuario/**").permitAll();
+                    
+                    
+//-------------------------- CONFIRGURAÇÃO DE AUTENTIFICAÇÃO DA CLASSE pagamento
+                    .requestMatchers(HttpMethod.GET, "pagamento/buscartodos/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "pagamento/buscarPorID/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "pagamento/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "pagamento/").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "pagamento/").hasRole("ADMIN")
+                    
+                    .requestMatchers(HttpMethod.GET, "pagamento/buscartodos/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.GET, "pagamento/buscarPorID/**").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.POST, "pagamento/").hasRole("GERENTE")
+                    .requestMatchers(HttpMethod.PUT, "pagamento/").hasRole("GERENTE")
+                    .requestMatchers("/usuario/**").permitAll();
 
+                
 //--------------------------CONFIRMAÇÃO DE ACESSO DO USUARIO
 //                .requestMatchers("/usuario/**").permitAll();
 
