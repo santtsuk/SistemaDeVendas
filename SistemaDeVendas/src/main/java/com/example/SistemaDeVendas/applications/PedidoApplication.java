@@ -3,6 +3,7 @@ package com.example.SistemaDeVendas.applications;
 import com.example.SistemaDeVendas.configs.RegraNegocioException;
 import com.example.SistemaDeVendas.entities.*;
 import com.example.SistemaDeVendas.interfacies.IPedido;
+import com.example.SistemaDeVendas.repositories.ClienteRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.ProdutoRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,14 @@ public class PedidoApplication implements IPedido {
 
     private final PedidoRepositoryMySql pedidoRepository;
     private  ProdutoRepositoryMySql produtoRepository;
+    private ClienteRepositoryMySql clienteRepository;
 
 
     @Autowired
-public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoRepositoryMySql produtoRepository) {
+public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoRepositoryMySql produtoRepository,ClienteRepositoryMySql clienteRepository) {
     this.pedidoRepository = pedidoRepository;
     this.produtoRepository = produtoRepository;
+    this.clienteRepository = clienteRepository;
 }
 
 
@@ -54,8 +57,10 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
         }
 
         pedido.calcularValorTotal();
-        atualizarCategoria(pedido.getIdCliente());
         this.pedidoRepository.salvar(pedido);
+
+        Cliente cliente = pedido.getIdCliente();
+        cliente.atualizarCategoria();
     }
 
     public void atualizar(int id, Pedido pedido) {
@@ -72,27 +77,5 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
     }
 
 
-
-    public void atualizarCategoria(Cliente cliente){
-        float totalCompra = totalValorCompra();
-        if(totalCompra >=1000){
-            cliente.setCategoria(Categorias.BRONZE);
-        }
-        else if (totalCompra >=3000) {
-            cliente.setCategoria(Categorias.PRATA);
-        }
-        else if (totalCompra >=7000) {
-            cliente.setCategoria(Categorias.OURO);
-        }
-        else if (totalCompra >=10000) {
-            cliente.setCategoria(Categorias.DIAMANTE);
-        }
-
-    }
-
-    private float totalValorCompra() {
-        //criar logica
-        return 0;
-    }
 
 }

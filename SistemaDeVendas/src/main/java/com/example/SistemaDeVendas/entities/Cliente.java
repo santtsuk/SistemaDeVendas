@@ -2,8 +2,10 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "cliente")
@@ -112,5 +114,29 @@ public class Cliente {
         this.descontoFidelidades = descontoFidelidades;
     }
 
-    
+    private float totalValorCompra() {
+        LocalDate dataLimite = LocalDate.now().minusDays(90);
+        return pedidos.stream()
+                .filter(pedido -> pedido.getDataPedido().isAfter(dataLimite)
+                .map(Pedido::getValorTotal)
+                .reduce(0f, Float::sum);
+    }
+
+    public void atualizarCategoria(){
+
+        float totalCompra = totalValorCompra();
+
+        if (totalCompra >= 10000) {
+            this.categoria = Categorias.DIAMANTE;
+        } else if (totalCompra >= 7000) {
+            this.categoria = Categorias.OURO;
+        } else if (totalCompra >= 3000) {
+            this.categoria = Categorias.PRATA;
+        } else if (totalCompra >= 1000) {
+            this.categoria = Categorias.BRONZE;
+        } else {
+            this.categoria = Categorias.SEM_CATEGORIA;
+        }
+
+    }
 }
