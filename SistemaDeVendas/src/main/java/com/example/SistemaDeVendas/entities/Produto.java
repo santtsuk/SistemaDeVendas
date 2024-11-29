@@ -107,4 +107,12 @@ public class Produto {
     public void setItemPedidos(List<ItemPedido> itemPedidos) {
         this.itemPedidos = itemPedidos;
     }
+
+    public void baixarEstoque(int quantidade) {
+        this.estoque = this.estoque - quantidade;
+    }
+
+    public boolean verificarEstoque(int quantidade) {
+        return this.estoque < quantidade;
+    }
 }

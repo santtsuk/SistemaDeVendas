@@ -28,6 +28,10 @@ public class Cliente {
     @Column(name = "endereco")
     private String endereco;
 
+    @Enumerated(EnumType.STRING)
+    @JoinColumn (name = "categoria")
+    private Categorias categoria;
+
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<Pedido> pedidos  = new ArrayList<>();
 
@@ -40,6 +44,7 @@ public class Cliente {
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
+        this.categoria = Categorias.SEM_CATEGORIA;
 
     }
 
@@ -95,6 +100,10 @@ public class Cliente {
         this.endereco = endereco;
     }
 
+    public Categorias getCategoria() {return categoria;}
+
+    public void setCategoria(Categorias categoria) {this.categoria = categoria;}
+
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
@@ -102,4 +111,6 @@ public class Cliente {
     public void setDescontoFidelidades(List<DescontoFidelidade> descontoFidelidades) {
         this.descontoFidelidades = descontoFidelidades;
     }
+
+    
 }

@@ -13,22 +13,25 @@ public class DescontoFidelidade {
     private int id;
 
     @ManyToOne
-    @JoinColumn (name = "id_Cliente")
+    @JoinColumn (name = "id_cliente")
     private Cliente cliente;
 
-    @Column(name = "valor_Desconto")
+    @Column(name = "valor_desconto")
     private float valorDesconto;
 
-    @Column(name = "data_Aplicacao")
+    @Column(name = "data_aplicacao")
     private LocalDate dataAplicacao;
+
+    @Column(name = "data_expirar")
+    private LocalDate dataExpirar;
 
     @OneToOne(mappedBy = "descontoFidelidade",cascade = CascadeType.ALL)
     private Pagamento pagamento;
 
-    public DescontoFidelidade(Cliente cliente, float valorDesconto, LocalDate dataAplicacao) {
+    public DescontoFidelidade(Cliente cliente, float valorDesconto,LocalDate dataAplicacao,LocalDate dataExpirar) {
         this.cliente = cliente;
-        this.valorDesconto = valorDesconto;
         this.dataAplicacao = dataAplicacao;
+        this.dataExpirar = dataExpirar;
     }
 
     public DescontoFidelidade() {
@@ -65,5 +68,33 @@ public class DescontoFidelidade {
 
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
+    }
+
+    public LocalDate getDataExpirar() {return dataExpirar;}
+
+    public void setDataExpirar(LocalDate dataExpirar) {this.dataExpirar = dataExpirar;}
+
+    public boolean verificarVencimento() {
+        return this.dataExpirar.isBefore(LocalDate.now());
+    }
+    public boolean verificarValorDesconto(float valorTotal){
+        return valorTotal < valorDesconto ;
+    }
+
+    public float valorDesconto(float valorTotal){
+
+        if (cliente.getCategoria() == Categorias.BRONZE) {
+            return this.valorDesconto = (float) (valorTotal * 0.02);
+        }
+        else if (cliente.getCategoria() == Categorias.PRATA) {
+            return this.valorDesconto = (float) (valorTotal * 0.05);
+        }
+        else if (cliente.getCategoria() == Categorias.OURO) {
+            return this.valorDesconto = (float) (valorTotal * 0.10);
+        }
+        else if (cliente.getCategoria() == Categorias.DIAMANTE) {
+            return this.valorDesconto = (float) (valorTotal * 0.15);
+        }
+        return 0;
     }
 }

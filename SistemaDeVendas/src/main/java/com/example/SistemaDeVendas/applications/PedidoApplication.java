@@ -1,9 +1,7 @@
 package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.configs.RegraNegocioException;
-import com.example.SistemaDeVendas.entities.ItemPedido;
-import com.example.SistemaDeVendas.entities.Pedido;
-import com.example.SistemaDeVendas.entities.Produto;
+import com.example.SistemaDeVendas.entities.*;
 import com.example.SistemaDeVendas.interfacies.IPedido;
 import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.ProdutoRepositoryMySql;
@@ -35,22 +33,28 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
     }
 
     public void salvar(Pedido pedido) {
-
-        if (pedido.getItemPedidos() == null || pedido.getItemPedidos().isEmpty()) {
+        if (pedido.verificaItemExistente()) {
             throw new RegraNegocioException("O pedido deve ter pelo menos um item associado.");
         }
+
         for (ItemPedido item : pedido.getItemPedidos()) {
             Produto produto = produtoRepository.buscarPorId(item.getIdProduto().getId());
+
             if (produto == null) {
                 throw new RegraNegocioException("Produto não encontrado.");
             }
-            if (produto.getEstoque() < item.getQuantidade()) {
+
+            if (produto.verificarEstoque(item.getQuantidade())) {
                 throw new RegraNegocioException("Estoque insuficiente para o produto: " + produto.getNome());
             }
-            produto.setEstoque(produto.getEstoque() - item.getQuantidade());
-            produtoRepository.atualizar(produto.getId(),produto);
+
+            produto.baixarEstoque(item.getQuantidade());
+
+            produtoRepository.atualizar(produto.getId(), produto);
         }
+
         pedido.calcularValorTotal();
+        atualizarCategoria(pedido.getIdCliente());
         this.pedidoRepository.salvar(pedido);
     }
 
@@ -65,6 +69,30 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
 
     public void deletar(int id) {
         this.pedidoRepository.deletar(id);
+    }
+
+
+
+    public void atualizarCategoria(Cliente cliente){
+        float totalCompra = totalValorCompra();
+        if(totalCompra >=1000){
+            cliente.setCategoria(Categorias.BRONZE);
+        }
+        else if (totalCompra >=3000) {
+            cliente.setCategoria(Categorias.PRATA);
+        }
+        else if (totalCompra >=7000) {
+            cliente.setCategoria(Categorias.OURO);
+        }
+        else if (totalCompra >=10000) {
+            cliente.setCategoria(Categorias.DIAMANTE);
+        }
+
+    }
+
+    private float totalValorCompra() {
+        //criar logica
+        return 0;
     }
 
 }

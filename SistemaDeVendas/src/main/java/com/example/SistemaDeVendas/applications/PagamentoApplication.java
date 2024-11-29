@@ -43,27 +43,23 @@ public class PagamentoApplication implements IPagamento {
     public void salvar(Pagamento pagamento) {
         Pedido pedido = pagamento.getPedido();
 
-        if (pagamento.getDescontoFidelidade() != null) {
+        if (pagamento.verificaDescontoExistente()) {
             DescontoFidelidade desconto = descontoFidelidadeRepository.buscarPorId(pagamento.getDescontoFidelidade().getId());
+
             if (desconto == null) {
                 throw new RegraNegocioException("Desconto não encontrado.");
             }
-
-            if (desconto.getDataAplicacao().isBefore(LocalDate.now())) {
+            if (desconto.verificarVencimento()) {
                 throw new RegraNegocioException("Desconto expirado.");
             }
 
-            float valorDesconto = desconto.getValorDesconto();
-            float valorTotalAtual = pedido.getValorTotal();
+            float valorDesconto = desconto.valorDesconto(pedido.getValorTotal());
 
-            
-            if (valorDesconto > 0) {
+            if (desconto.verificarValorDesconto(pedido.getValorTotal())) {
                 throw new RegraNegocioException("O valor do desconto não pode ser maior que o total do pedido.");
             }
 
-
-            float  novoValorTotal = valorTotalAtual - valorDesconto;
-            pedido.setValorTotal(novoValorTotal);
+            pedido.aplicarDesconto(valorDesconto);
             pedidoRepository.atualizar(pedido.getId(), pedido);
         }
         this.pagamentoRepository.salvar(pagamento);

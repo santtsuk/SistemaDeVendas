@@ -137,4 +137,13 @@ public class Pedido {
         }
     }
 
+    public boolean verificaItemExistente() {
+        return this.itemPedidos == null || this.itemPedidos.isEmpty();
+    }
+
+    public void aplicarDesconto(float valor){
+        this.valorTotal = valorTotal - valor;
+    }
+
+
 }

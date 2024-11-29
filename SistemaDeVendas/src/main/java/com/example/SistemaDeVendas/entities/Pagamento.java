@@ -101,4 +101,8 @@ public class Pagamento {
     public void setDescontoFidelidade(DescontoFidelidade descontoFidelidade) {
         this.descontoFidelidade = descontoFidelidade;
     }
+
+    public boolean verificaDescontoExistente(){
+        return this.descontoFidelidade == null;
+    }
 }
