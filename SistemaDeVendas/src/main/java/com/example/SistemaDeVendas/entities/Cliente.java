@@ -117,7 +117,8 @@ public class Cliente {
     private float totalValorCompra() {
         LocalDate dataLimite = LocalDate.now().minusDays(90);
         return pedidos.stream()
-                .filter(pedido -> pedido.getDataPedido().isAfter(dataLimite)
+                .filter(pedido -> pedido.getDataPedido().isAfter(dataLimite))
+                .filter(pedido -> pedido.getStatus() == StatusPedido.PAGO)
                 .map(Pedido::getValorTotal)
                 .reduce(0f, Float::sum);
     }
