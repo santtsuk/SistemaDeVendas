@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuario/")
 public class UsuarioController {
     private UsuarioFacade usuarioFacade;
 
@@ -19,14 +19,14 @@ public class UsuarioController {
         this.usuarioFacade = usuarioFacade;
     }
 
-    @GetMapping("/buscarTodos")
+    @GetMapping("buscarTodos")
     public ResponseEntity<List<Usuario>> buscarTodos() {
         List<Usuario> usuarios = usuarioFacade.buscarTodos();
 
         return ResponseEntity.ok(usuarios);
     }
 
-    @GetMapping("/buscarPorID/{id}")
+    @GetMapping("buscarPorID/{id}")
     public ResponseEntity<Usuario> buscarPorId(@PathVariable int id) {
         Usuario usuario = usuarioFacade.buscarPorId(id);
 
@@ -39,14 +39,14 @@ public class UsuarioController {
         return new ResponseEntity(null, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<Usuario> atualizar(@PathVariable int id, @RequestBody Usuario usuario) {
         usuarioFacade.atualizar(id, usuario);
 
         return ResponseEntity.ok(usuario);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deletar(@PathVariable int id) {
         usuarioFacade.deletar(id);
         return ResponseEntity.ok(null);
