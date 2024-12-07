@@ -1,8 +1,11 @@
 package com.example.SistemaDeVendas.applications;
 
 import com.example.SistemaDeVendas.entities.ItemPedido;
+import com.example.SistemaDeVendas.entities.Pedido;
 import com.example.SistemaDeVendas.interfacies.IItemPedido;
 import com.example.SistemaDeVendas.repositories.ItemPedidoRepositoryMySql;
+import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +15,12 @@ import java.util.List;
 public class ItemPedidoApplication implements IItemPedido {
 
     private ItemPedidoRepositoryMySql itemPedidoRepository;
+    private PedidoRepositoryMySql pedidoRepository;
 
     @Autowired
-    public ItemPedidoApplication(ItemPedidoRepositoryMySql itemPedidoRepository) {
+    public ItemPedidoApplication(ItemPedidoRepositoryMySql itemPedidoRepository,PedidoRepositoryMySql pedidoRepository) {
         this.itemPedidoRepository = itemPedidoRepository;
+        this.pedidoRepository = pedidoRepository;
     }
 
     public ItemPedido buscarPorId(int id) {
@@ -27,7 +32,9 @@ public class ItemPedidoApplication implements IItemPedido {
     }
 
     public void salvar(ItemPedido itemPedido) {
+
         this.itemPedidoRepository.salvar(itemPedido);
+        atualizarValorTotalPedido(itemPedido.getIdProduto().getId());
     }
 
     public void atualizar(int id, ItemPedido itemPedido) {
@@ -40,6 +47,15 @@ public class ItemPedidoApplication implements IItemPedido {
     }
 
     public void deletar(int id) {
+        ItemPedido itemPedido = itemPedidoRepository.buscarPorId(id);
         this.itemPedidoRepository.deletar(id);
+        atualizarValorTotalPedido(itemPedido.getIdPedido().getId());
+    }
+    public void atualizarValorTotalPedido(int pedidoId){
+        Pedido pedido = pedidoRepository.buscarPorId(pedidoId);
+        if(pedido != null){
+            pedido.calcularValorTotal();
+            pedidoRepository.atualizar(pedido.getId(),pedido);
+        }
     }
 }

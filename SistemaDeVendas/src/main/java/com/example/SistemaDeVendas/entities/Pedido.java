@@ -30,7 +30,7 @@ public class Pedido {
     private Usuario usuario;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn (name = "status")
+    @Column (name = "status")
     private StatusPedido status;
 
     @OneToMany(mappedBy= "pedido")

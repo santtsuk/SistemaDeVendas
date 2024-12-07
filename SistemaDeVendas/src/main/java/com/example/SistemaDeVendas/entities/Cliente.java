@@ -31,7 +31,7 @@ public class Cliente {
     private String endereco;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn (name = "categoria")
+    @Column (name = "categoria")
     private Categorias categoria;
 
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
@@ -115,6 +115,11 @@ public class Cliente {
     }
 
     private float totalValorCompra() {
+
+        if(this.pedidos == null || this.pedidos.isEmpty()){
+            return 0f;
+        }
+
         LocalDate dataLimite = LocalDate.now().minusDays(90);
         return pedidos.stream()
                 .filter(pedido -> pedido.getDataPedido().isAfter(dataLimite))

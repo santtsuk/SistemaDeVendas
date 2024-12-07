@@ -61,6 +61,7 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
 
         if (cliente != null) {
             cliente.atualizarCategoria();
+            clienteRepository.atualizar(cliente.getId(),cliente);
         } else {
 
             System.out.println("Cliente não encontrado");
