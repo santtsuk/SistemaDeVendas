@@ -34,7 +34,7 @@ public class UsuarioRepositoryMySql implements IUsuario {
 
     @Override
     public List<Usuario> buscarTodos() {
-        return entityManager.createQuery("select c from Usuario c ORDER BY c.nome", Usuario.class).getResultList();
+        return entityManager.createQuery("select c from Usuario c ORDER BY c.cpf", Usuario.class).getResultList();
     }
 
     @Transactional

@@ -21,7 +21,7 @@ public class Cargo {
     private float salario;
 
     @OneToMany(mappedBy = "cargo",cascade = CascadeType.ALL)
-    private List<Funcionario> funcionarios  = new ArrayList<>();
+    private List<Funcionario> funcionarios;
 
     public Cargo(String nomeCargo, float salario) {
         this.nomeCargo = nomeCargo;

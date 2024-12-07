@@ -45,7 +45,7 @@ public class FuncionarioRepositoryMySql implements IFuncionario {
         funcionarioInDB.setCpf(funcionario.getCpf());
         funcionarioInDB.setCargo(funcionario.getCargo());
         funcionarioInDB.setSetor(funcionario.getSetor());
-        funcionarioInDB.setDataAdimissao(funcionario.getDataAdimissao());
+        funcionarioInDB.setDataAdmissao(funcionario.getDataAdmissao());
         this.entityManager.merge(funcionarioInDB);
     }
 

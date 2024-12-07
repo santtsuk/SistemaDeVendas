@@ -1,7 +1,9 @@
 package com.example.SistemaDeVendas.applications;
 
+import com.example.SistemaDeVendas.entities.Cargo;
 import com.example.SistemaDeVendas.entities.Funcionario;
 import com.example.SistemaDeVendas.interfacies.IFuncionario;
+import com.example.SistemaDeVendas.repositories.CargoRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.FuncionarioRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.List;
 public class FuncionarioApplication  {
 
     private final FuncionarioRepositoryMySql funcionarioRepository;
+    private final CargoRepositoryMySql cargoRepository;
 
     @Autowired
-    public FuncionarioApplication(FuncionarioRepositoryMySql funcionarioRepository) {
+    public FuncionarioApplication(FuncionarioRepositoryMySql funcionarioRepository, CargoRepositoryMySql cargoRepository) {
         this.funcionarioRepository = funcionarioRepository;
+        this.cargoRepository = cargoRepository;
     }
 
     public Funcionario buscarPorId(int id) {
@@ -27,6 +31,7 @@ public class FuncionarioApplication  {
     }
 
     public void salvar(Funcionario funcionario) {
+
         this.funcionarioRepository.salvar(funcionario);
     }
 

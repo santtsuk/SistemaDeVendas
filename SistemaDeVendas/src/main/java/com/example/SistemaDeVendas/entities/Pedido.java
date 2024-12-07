@@ -33,10 +33,10 @@ public class Pedido {
     @JoinColumn (name = "status")
     private StatusPedido status;
 
-    @OneToMany(mappedBy= "pedido",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy= "pedido")
     private List<Pagamento> pagamentos  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itemPedidos  = new ArrayList<>();
 
     public Pedido() {

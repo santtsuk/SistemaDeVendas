@@ -18,7 +18,7 @@ public class Funcionario {
     @Column(name = "cpf",unique = true)
     private String cpf;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn (name = "id_cargo")
     private Cargo cargo;
 
@@ -82,12 +82,12 @@ public class Funcionario {
         this.setor = setor;
     }
 
-    public LocalDate getDataAdimissao() {
+    public LocalDate getDataAdmissao() {
         return dataAdmissao;
     }
 
-    public void setDataAdimissao(LocalDate dataAdimissao) {
-        this.dataAdmissao = dataAdimissao;
+    public void setDataAdmissao(LocalDate dataAdmissao) {
+        this.dataAdmissao = dataAdmissao;
     }
 
     public void setUsuario(Usuario usuario) {

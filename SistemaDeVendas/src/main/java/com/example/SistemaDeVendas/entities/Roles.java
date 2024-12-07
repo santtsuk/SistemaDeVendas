@@ -13,7 +13,7 @@ public class Roles {
         @Column(name = "role")
         private String role;
 
-        @ManyToOne(cascade = CascadeType.ALL)
+        @ManyToOne()
         @JoinColumn(name = "usuario_id", referencedColumnName = "id")
         private Usuario usuario;
 

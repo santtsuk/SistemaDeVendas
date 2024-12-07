@@ -36,9 +36,6 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
     }
 
     public void salvar(Pedido pedido) {
-        if (pedido.verificaItemExistente()) {
-            throw new RegraNegocioException("O pedido deve ter pelo menos um item associado.");
-        }
 
         for (ItemPedido item : pedido.getItemPedidos()) {
             Produto produto = produtoRepository.buscarPorId(item.getIdProduto().getId());
@@ -59,8 +56,16 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
         pedido.calcularValorTotal();
         this.pedidoRepository.salvar(pedido);
 
-        Cliente cliente = pedido.getIdCliente();
-        cliente.atualizarCategoria();
+
+        Cliente cliente = clienteRepository.buscarPorId(pedido.getIdCliente().getId());
+
+        if (cliente != null) {
+            cliente.atualizarCategoria();
+        } else {
+
+            System.out.println("Cliente não encontrado");
+        }
+
     }
 
     public void atualizar(int id, Pedido pedido) {
