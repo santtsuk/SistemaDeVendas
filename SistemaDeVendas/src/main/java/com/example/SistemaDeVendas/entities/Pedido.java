@@ -33,7 +33,7 @@ public class Pedido {
     @Column (name = "status")
     private StatusPedido status;
 
-    @OneToMany(mappedBy= "pedido")
+    @OneToMany(mappedBy= "idPedido")
     private List<Pagamento> pagamentos  = new ArrayList<>();
 
     @OneToMany(mappedBy = "pedido")

@@ -8,10 +8,13 @@ import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.ProdutoRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class PedidoApplication implements IPedido {
 
     private final PedidoRepositoryMySql pedidoRepository;
@@ -37,7 +40,15 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
 
     public void salvar(Pedido pedido) {
 
+        if (pedido.getItemPedidos() == null) {
+            pedido.setItemPedidos(new ArrayList<>());
+        }
+
         for (ItemPedido item : pedido.getItemPedidos()) {
+            if (item.getIdProduto() == null) {
+                throw new RegraNegocioException("Produto não encontrado para o item do pedido.");
+            }
+
             Produto produto = produtoRepository.buscarPorId(item.getIdProduto().getId());
 
             if (produto == null) {
@@ -53,7 +64,9 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
             produtoRepository.atualizar(produto.getId(), produto);
         }
 
+
         pedido.calcularValorTotal();
+        pedido.atualizarStatusPagamento();
         this.pedidoRepository.salvar(pedido);
 
 
@@ -66,7 +79,6 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
 
             System.out.println("Cliente não encontrado");
         }
-
     }
 
     public void atualizar(int id, Pedido pedido) {

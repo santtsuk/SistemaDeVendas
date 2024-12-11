@@ -29,6 +29,7 @@ public class ClienteApplication {
 
 
     public void salvar(Cliente cliente) {
+        cliente.atualizarCategoria();
         this.clienteRepository.salvar(cliente);
     }
 

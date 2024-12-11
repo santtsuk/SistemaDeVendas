@@ -41,9 +41,10 @@ public class PagamentoApplication implements IPagamento {
     }
 
     public void salvar(Pagamento pagamento) {
-        Pedido pedido = pagamento.getPedido();
 
-        if (pagamento.verificaDescontoExistente()) {
+        Pedido pedido = pedidoRepository.buscarPorId(pagamento.getPedido().getId());
+
+
             DescontoFidelidade desconto = descontoFidelidadeRepository.buscarPorId(pagamento.getDescontoFidelidade().getId());
 
             if (desconto == null) {
@@ -52,22 +53,33 @@ public class PagamentoApplication implements IPagamento {
             if (desconto.verificarVencimento()) {
                 throw new RegraNegocioException("Desconto expirado.");
             }
+            
+            float valorDesconto = desconto.valorDesconto(pedido.getValorTotal());;
 
-            float valorDesconto = desconto.valorDesconto(pedido.getValorTotal());
-
+            descontoFidelidadeRepository.atualizar(pagamento.getDescontoFidelidade().getId(),desconto);
             if (desconto.verificarValorDesconto(pedido.getValorTotal())) {
                 throw new RegraNegocioException("O valor do desconto não pode ser maior que o total do pedido.");
             }
 
             pedido.aplicarDesconto(valorDesconto);
             pedidoRepository.atualizar(pedido.getId(), pedido);
-        }
+
+
         this.pagamentoRepository.salvar(pagamento);
 
-        
+
         pedido.atualizarStatusPagamento();
-        this.pedidoRepository.atualizar(pedido.getId(), pedido);
+
+        // Buscar o pedido novamente para garantir que apenas o status será alterado
+        Pedido pedidoAtualizado = pedidoRepository.buscarPorId(pedido.getId());
+
+        // Atualizar apenas o status do pedido (não modificar outros campos)
+        pedidoAtualizado.setStatus(pedido.getStatus());
+
+        // Atualizar o pedido com o novo status
+        pedidoRepository.atualizar(pedidoAtualizado.getId(), pedidoAtualizado);
     }
+
 
     public void atualizar(int id, Pagamento pagamento) {
         Pagamento pagamentoInDB = this.pagamentoRepository.buscarPorId(id);

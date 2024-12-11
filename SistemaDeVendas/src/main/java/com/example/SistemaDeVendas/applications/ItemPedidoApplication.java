@@ -8,6 +8,7 @@ import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,10 +32,10 @@ public class ItemPedidoApplication implements IItemPedido {
         return this.itemPedidoRepository.buscarTodos();
     }
 
+    @Transactional
     public void salvar(ItemPedido itemPedido) {
-
         this.itemPedidoRepository.salvar(itemPedido);
-        atualizarValorTotalPedido(itemPedido.getIdProduto().getId());
+        atualizarValorTotalPedido(itemPedido.getIdPedido().getId());
     }
 
     public void atualizar(int id, ItemPedido itemPedido) {
@@ -55,6 +56,7 @@ public class ItemPedidoApplication implements IItemPedido {
         Pedido pedido = pedidoRepository.buscarPorId(pedidoId);
         if(pedido != null){
             pedido.calcularValorTotal();
+            pedido.atualizarStatusPagamento();
             pedidoRepository.atualizar(pedido.getId(),pedido);
         }
     }

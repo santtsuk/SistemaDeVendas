@@ -2,7 +2,6 @@ package com.example.SistemaDeVendas.entities;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -16,7 +15,7 @@ public class Pagamento {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido")
-    private Pedido pedido;
+    private Pedido idPedido;
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_pagamento")
@@ -34,8 +33,8 @@ public class Pagamento {
     private DescontoFidelidade descontoFidelidade;
 
 
-    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
-        this.pedido = pedido;
+    public Pagamento(Pedido idPedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
+        this.idPedido = idPedido;
         this.tipoPagamento = tipoPagamento;
         this.valor = valor;
         this.dataPagamento = dataPagamento;
@@ -43,8 +42,8 @@ public class Pagamento {
     }
 
 
-    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento) {
-        this.pedido = pedido;
+    public Pagamento(Pedido idPedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento) {
+        this.idPedido = idPedido;
         this.tipoPagamento = tipoPagamento;
         this.valor = valor;
         this.dataPagamento = dataPagamento;
@@ -63,11 +62,11 @@ public class Pagamento {
     }
 
     public Pedido getPedido() {
-        return pedido;
+        return idPedido;
     }
 
-    public void setIdPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setPedido(Pedido pedido) {
+        this.idPedido = pedido;
     }
 
     public TipoPagamento getIdPagamento() {
