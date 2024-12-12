@@ -1,5 +1,7 @@
 package com.example.SistemaDeVendas.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ public class Pagamento {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido")
+    @JsonBackReference
     private Pedido idPedido;
 
     @ManyToOne

@@ -68,17 +68,6 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
         pedido.calcularValorTotal();
         pedido.atualizarStatusPagamento();
         this.pedidoRepository.salvar(pedido);
-
-
-        Cliente cliente = clienteRepository.buscarPorId(pedido.getIdCliente().getId());
-
-        if (cliente != null) {
-            cliente.atualizarCategoria();
-            clienteRepository.atualizar(cliente.getId(),cliente);
-        } else {
-
-            System.out.println("Cliente não encontrado");
-        }
     }
 
     public void atualizar(int id, Pedido pedido) {

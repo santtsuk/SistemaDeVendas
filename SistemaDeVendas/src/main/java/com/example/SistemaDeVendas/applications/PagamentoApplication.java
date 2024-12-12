@@ -67,16 +67,9 @@ public class PagamentoApplication implements IPagamento {
 
         this.pagamentoRepository.salvar(pagamento);
 
-
         pedido.atualizarStatusPagamento();
-
-        // Buscar o pedido novamente para garantir que apenas o status será alterado
         Pedido pedidoAtualizado = pedidoRepository.buscarPorId(pedido.getId());
-
-        // Atualizar apenas o status do pedido (não modificar outros campos)
         pedidoAtualizado.setStatus(pedido.getStatus());
-
-        // Atualizar o pedido com o novo status
         pedidoRepository.atualizar(pedidoAtualizado.getId(), pedidoAtualizado);
     }
 

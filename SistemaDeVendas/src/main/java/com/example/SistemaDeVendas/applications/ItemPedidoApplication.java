@@ -1,11 +1,17 @@
 package com.example.SistemaDeVendas.applications;
 
+import com.example.SistemaDeVendas.configs.RegraNegocioException;
+import com.example.SistemaDeVendas.controller.CargoController;
+import com.example.SistemaDeVendas.entities.Cliente;
 import com.example.SistemaDeVendas.entities.ItemPedido;
 import com.example.SistemaDeVendas.entities.Pedido;
+import com.example.SistemaDeVendas.entities.Produto;
 import com.example.SistemaDeVendas.interfacies.IItemPedido;
+import com.example.SistemaDeVendas.repositories.ClienteRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.ItemPedidoRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
 
+import com.example.SistemaDeVendas.repositories.ProdutoRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,11 +23,15 @@ public class ItemPedidoApplication implements IItemPedido {
 
     private ItemPedidoRepositoryMySql itemPedidoRepository;
     private PedidoRepositoryMySql pedidoRepository;
+    private ProdutoRepositoryMySql produtoRepository;
+    private ClienteRepositoryMySql clienteRepository;
 
     @Autowired
-    public ItemPedidoApplication(ItemPedidoRepositoryMySql itemPedidoRepository,PedidoRepositoryMySql pedidoRepository) {
+    public ItemPedidoApplication(ItemPedidoRepositoryMySql itemPedidoRepository,PedidoRepositoryMySql pedidoRepository,ProdutoRepositoryMySql produtoRepository,ClienteRepositoryMySql clienteRepository) {
         this.itemPedidoRepository = itemPedidoRepository;
         this.pedidoRepository = pedidoRepository;
+        this.produtoRepository = produtoRepository;
+        this.clienteRepository = clienteRepository;
     }
 
     public ItemPedido buscarPorId(int id) {
@@ -34,6 +44,26 @@ public class ItemPedidoApplication implements IItemPedido {
 
     @Transactional
     public void salvar(ItemPedido itemPedido) {
+
+            if (itemPedido.getIdProduto() == null) {
+                throw new RegraNegocioException("Produto não encontrado para o item do pedido.");
+            }
+
+
+            Produto produto = produtoRepository.buscarPorId(itemPedido.getIdProduto().getId());
+
+            if (produto == null) {
+                throw new RegraNegocioException("Produto não encontrado.");
+            }
+
+            if (produto.verificarEstoque(itemPedido.getQuantidade())) {
+                throw new RegraNegocioException("Estoque insuficiente para o produto: " + produto.getNome());
+            }
+
+            produto.baixarEstoque(itemPedido.getQuantidade());
+
+            produtoRepository.atualizar(produto.getId(), produto);
+
         this.itemPedidoRepository.salvar(itemPedido);
         atualizarValorTotalPedido(itemPedido.getIdPedido().getId());
     }
@@ -52,12 +82,27 @@ public class ItemPedidoApplication implements IItemPedido {
         this.itemPedidoRepository.deletar(id);
         atualizarValorTotalPedido(itemPedido.getIdPedido().getId());
     }
-    public void atualizarValorTotalPedido(int pedidoId){
+    public void atualizarValorTotalPedido(int pedidoId) {
         Pedido pedido = pedidoRepository.buscarPorId(pedidoId);
-        if(pedido != null){
-            pedido.calcularValorTotal();
-            pedido.atualizarStatusPagamento();
-            pedidoRepository.atualizar(pedido.getId(),pedido);
+        if (pedido == null) {
+            throw new RegraNegocioException("Pedido não encontrado.");
         }
+
+        pedido.calcularValorTotal();
+        pedido.atualizarStatusPagamento();
+        pedidoRepository.atualizar(pedido.getId(), pedido);
+
+        if (pedido.getIdCliente() == null) {
+            throw new RegraNegocioException("Pedido não possui um cliente associado.");
+        }
+
+        Cliente cliente = clienteRepository.buscarPorId(pedido.getIdCliente().getId());
+        if (cliente == null) {
+            throw new RegraNegocioException("Cliente associado ao pedido não foi encontrado.");
+        }
+
+        cliente.atualizarCategoria();
+        clienteRepository.atualizar(cliente.getId(), cliente);
     }
+
 }

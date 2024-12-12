@@ -1,9 +1,6 @@
 package com.example.SistemaDeVendas.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -20,6 +17,7 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn (name = "id_pedido")
+    @JsonBackReference
     private Pedido pedido;
 
     @ManyToOne

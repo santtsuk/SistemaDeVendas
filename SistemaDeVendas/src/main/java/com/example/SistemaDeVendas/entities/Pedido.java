@@ -1,5 +1,7 @@
 package com.example.SistemaDeVendas.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -34,9 +36,11 @@ public class Pedido {
     private StatusPedido status;
 
     @OneToMany(mappedBy= "idPedido")
+    @JsonManagedReference //AJUSTAR - Retirou todas as listas
     private List<Pagamento> pagamentos  = new ArrayList<>();
 
     @OneToMany(mappedBy = "pedido")
+    @JsonManagedReference////AJUSTAR - Retirou todas as listasss
     private List<ItemPedido> itemPedidos  = new ArrayList<>();
 
     public Pedido() {
@@ -127,7 +131,7 @@ public class Pedido {
                 .map(Pagamento::getValor)
                 .filter(valor -> valor != null)
                 .reduce(0f, Float::sum);
-        if (totalPago > valorTotal && totalPago > 0) {
+        if (totalPago < valorTotal && totalPago > 0) {
             this.status = StatusPedido.PARCIALMENTE_PAGO;
         } else if (totalPago == valorTotal) {
             this.status = StatusPedido.PAGO;
