@@ -34,6 +34,10 @@ public class Pedido {
     private StatusPedido status;
 
     @OneToMany(mappedBy= "idPedido")
+<<<<<<< Updated upstream
+=======
+    @JsonManagedReference //AJUSTAR - Retirou todas as listassss
+>>>>>>> Stashed changes
     private List<Pagamento> pagamentos  = new ArrayList<>();
 
     @OneToMany(mappedBy = "pedido")
