@@ -86,10 +86,9 @@ atualizarValorTotalPedido(itemPedido.getIdPedido().id());
             throw new RegraNegocioException("Pedido não encontrado.");
         }
 
-        // Calcula o valor total do pedido
         pedido.calcularValorTotal();
 
-        // Verifica e aplica desconto fidelidade, se houver
+       
         if (pedido.getDescontoFidelidade() != null) {
             DescontoFidelidade descontoFidelidade = descontoFidelidadeRepository.buscarPorId(pedido.getDescontoFidelidade().getId());
 
@@ -97,19 +96,17 @@ atualizarValorTotalPedido(itemPedido.getIdPedido().id());
                 throw new RegraNegocioException("Desconto fidelidade não encontrado.");
             }
 
-            // Calcula e aplica o desconto
             float valorDesconto = descontoFidelidade.valorDesconto(pedido.getValorTotal());
             pedido.aplicarDesconto(valorDesconto);
 
-            // Atualiza o desconto fidelidade no repositório
             descontoFidelidadeRepository.atualizar(descontoFidelidade.getId(), descontoFidelidade);
         }
 
-        // Atualiza o status de pagamento do pedido
+   
         pedido.atualizarStatusPagamento();
         pedidoRepository.atualizar(pedido.getId(), pedido);
 
-        // Verifica e atualiza a categoria do cliente
+       
         if (pedido.getIdCliente() == null) {
             throw new RegraNegocioException("Pedido não possui um cliente associado.");
         }
