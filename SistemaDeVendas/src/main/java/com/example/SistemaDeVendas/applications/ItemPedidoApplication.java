@@ -71,6 +71,8 @@ public class ItemPedidoApplication implements IItemPedido {
             return;
 
         this.itemPedidoRepository.atualizar(id, itemPedido);
+
+atualizarValorTotalPedido(itemPedido.getIdPedido().id());
     }
 
     public void deletar(int id) {
