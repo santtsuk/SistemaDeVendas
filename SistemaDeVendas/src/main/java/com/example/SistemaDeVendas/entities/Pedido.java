@@ -35,25 +35,28 @@ public class Pedido {
     @Column (name = "status")
     private StatusPedido status;
 
-    @OneToMany(mappedBy= "idPedido")
-    @JsonManagedReference //AJUSTAR - Retirou todas as listas
+    @OneToOne
+    @JoinColumn(name = "desconto_fidelidade")
+    private DescontoFidelidade descontoFidelidade;
+
+    @OneToMany(mappedBy= "pedido")
     private List<Pagamento> pagamentos  = new ArrayList<>();
 
     @OneToMany(mappedBy = "pedido")
-    @JsonManagedReference////AJUSTAR - Retirou todas as listasss
     private List<ItemPedido> itemPedidos  = new ArrayList<>();
 
     public Pedido() {
 
     }
 
-    public Pedido(LocalDate dataPedido, Cliente cliente, float valorTotal, Usuario usuario) {
+    public Pedido(LocalDate dataPedido, Cliente cliente, float valorTotal, Usuario usuario, DescontoFidelidade descontoFidelidade) {
 
         this.dataPedido = dataPedido;
         this.cliente = cliente;
         this.valorTotal = valorTotal;
         this.usuario = usuario;
         this.status = StatusPedido.PENDENTE;
+        this.descontoFidelidade = descontoFidelidade;
     }
 
     public int getId() {
@@ -146,6 +149,18 @@ public class Pedido {
 
     public void aplicarDesconto(float valor){
         this.valorTotal = valorTotal - valor;
+    }
+
+    public DescontoFidelidade getDescontoFidelidade() {
+        return descontoFidelidade;
+    }
+
+    public void setDescontoFidelidade(DescontoFidelidade descontoFidelidade) {
+        this.descontoFidelidade = descontoFidelidade;
+    }
+
+    public boolean verificaDescontoExistente(){
+        return this.descontoFidelidade == null;
     }
 
 

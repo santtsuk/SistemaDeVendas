@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "item_Pedido")
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class ItemPedido {
 
     @Id
@@ -17,7 +16,6 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn (name = "id_pedido")
-    @JsonBackReference
     private Pedido pedido;
 
     @ManyToOne
@@ -48,8 +46,8 @@ public class ItemPedido {
         this.id = id;
     }
 
-    public Pedido getIdPedido() {
-        return pedido;
+    public PedidosRecord getIdPedido() {
+        return new PedidosRecord(pedido.getId(),pedido.getDataPedido());
     }
 
     public void setIdPedido(Pedido pedido) {

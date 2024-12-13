@@ -17,8 +17,7 @@ public class Pagamento {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido")
-    @JsonBackReference
-    private Pedido idPedido;
+    private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_pagamento")
@@ -30,26 +29,12 @@ public class Pagamento {
     @Column(name = "data_Pagamento")
     private LocalDate dataPagamento;
 
-
-    @OneToOne
-    @JoinColumn(name = "desconto_fidelidade")
-    private DescontoFidelidade descontoFidelidade;
-
-
-    public Pagamento(Pedido idPedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento, DescontoFidelidade descontoFidelidade) {
-        this.idPedido = idPedido;
+    public Pagamento(Pedido pedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento) {
+        this.pedido = pedido;
         this.tipoPagamento = tipoPagamento;
         this.valor = valor;
         this.dataPagamento = dataPagamento;
-        this.descontoFidelidade = descontoFidelidade;
-    }
 
-
-    public Pagamento(Pedido idPedido, TipoPagamento tipoPagamento, float  valor, LocalDate dataPagamento) {
-        this.idPedido = idPedido;
-        this.tipoPagamento = tipoPagamento;
-        this.valor = valor;
-        this.dataPagamento = dataPagamento;
     }
 
     public Pagamento() {
@@ -64,12 +49,12 @@ public class Pagamento {
         this.id = id;
     }
 
-    public Pedido getPedido() {
-        return idPedido;
+    public PedidosRecord getPedido() {
+        return new PedidosRecord(pedido.getId(),pedido.getDataPedido());
     }
 
     public void setPedido(Pedido pedido) {
-        this.idPedido = pedido;
+        this.pedido = pedido;
     }
 
     public TipoPagamento getIdPagamento() {
@@ -96,15 +81,5 @@ public class Pagamento {
         this.dataPagamento = dataPagamento;
     }
 
-    public DescontoFidelidade getDescontoFidelidade() {
-        return descontoFidelidade;
-    }
 
-    public void setDescontoFidelidade(DescontoFidelidade descontoFidelidade) {
-        this.descontoFidelidade = descontoFidelidade;
-    }
-
-    public boolean verificaDescontoExistente(){
-        return this.descontoFidelidade == null;
-    }
 }

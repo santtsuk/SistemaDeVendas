@@ -4,6 +4,7 @@ import com.example.SistemaDeVendas.configs.RegraNegocioException;
 import com.example.SistemaDeVendas.entities.*;
 import com.example.SistemaDeVendas.interfacies.IPedido;
 import com.example.SistemaDeVendas.repositories.ClienteRepositoryMySql;
+import com.example.SistemaDeVendas.repositories.DescontoFidelidadeRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.PedidoRepositoryMySql;
 import com.example.SistemaDeVendas.repositories.ProdutoRepositoryMySql;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,18 @@ import java.util.List;
 @Transactional
 public class PedidoApplication implements IPedido {
 
-    private final PedidoRepositoryMySql pedidoRepository;
+    private  PedidoRepositoryMySql pedidoRepository;
     private  ProdutoRepositoryMySql produtoRepository;
-    private ClienteRepositoryMySql clienteRepository;
+    private  DescontoFidelidadeRepositoryMySql descontoFidelidadeRepository;
+    private     ClienteRepositoryMySql clienteRepository;
 
 
     @Autowired
-public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoRepositoryMySql produtoRepository,ClienteRepositoryMySql clienteRepository) {
+    public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoRepositoryMySql produtoRepository,ClienteRepositoryMySql clienteRepository,DescontoFidelidadeRepositoryMySql descontoFidelidadeRepository) {
     this.pedidoRepository = pedidoRepository;
     this.produtoRepository = produtoRepository;
     this.clienteRepository = clienteRepository;
+    this.descontoFidelidadeRepository = descontoFidelidadeRepository;
 }
 
 
@@ -67,6 +70,24 @@ public PedidoApplication(PedidoRepositoryMySql pedidoRepository, ProdutoReposito
 
         pedido.calcularValorTotal();
         pedido.atualizarStatusPagamento();
+        DescontoFidelidade desconto = descontoFidelidadeRepository.buscarPorId(pedido.getDescontoFidelidade().getId());
+
+        if (desconto == null) {
+            throw new RegraNegocioException("Desconto não encontrado.");
+        }
+        if (desconto.verificarVencimento()) {
+            throw new RegraNegocioException("Desconto expirado.");
+        }
+
+        float valorDesconto = desconto.valorDesconto(pedido.getValorTotal());;
+
+        descontoFidelidadeRepository.atualizar(pedido.getDescontoFidelidade().getId(),desconto);
+        if (desconto.verificarValorDesconto(pedido.getValorTotal())) {
+            throw new RegraNegocioException("O valor do desconto não pode ser maior que o total do pedido.");
+        }
+
+        pedido.aplicarDesconto(valorDesconto);
+        pedidoRepository.atualizar(pedido.getId(), pedido);
         this.pedidoRepository.salvar(pedido);
     }
 

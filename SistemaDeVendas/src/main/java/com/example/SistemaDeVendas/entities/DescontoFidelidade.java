@@ -25,8 +25,8 @@ public class DescontoFidelidade {
     @Column(name = "data_expirar")
     private LocalDate dataExpirar;
 
-    @OneToOne(mappedBy = "descontoFidelidade",cascade = CascadeType.ALL)
-    private Pagamento pagamento;
+    @OneToOne(mappedBy = "descontoFidelidade")
+    private Pedido pedido;
 
     public DescontoFidelidade(Cliente cliente, float valorDesconto,LocalDate dataAplicacao,LocalDate dataExpirar) {
         this.cliente = cliente;
@@ -66,8 +66,8 @@ public class DescontoFidelidade {
         this.dataAplicacao = dataAplicacao;
     }
 
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
+    public void setPedidoo(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public LocalDate getDataExpirar() {return dataExpirar;}
